@@ -1,0 +1,32 @@
+<%# app/views/home/index.html.erb %>
+<% content_for :title, "Potepan Share - ホーム" %>
+<%# headerとfooterはlayout %>
+
+    <section class="hero">
+      <div class="hero-overlay">
+        <div class="hero-content">
+          <h1 class="hero-title">Potepan Share</h1>
+          <p class="hero-subtitle">
+            まだ体験したことのない<br>
+            旅をしよう
+          </p>
+
+          <div class="hero-search">
+            <%= form_with url: rooms_path, method: :get, local: true do |f| %>
+              <%= f.text_field :area,
+                    placeholder: "エリア名を入力",
+                    class: "hero-input" %>
+              <%= f.submit "検索", class: "hero-button" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<% if current_user %><%# sectionより下に書くこと ロクインしていない状態で見れなくなる %>
+  <p>Logged in as <%= current_user.name %></p>
+
+  <%= button_to "Logout", logout_path, method: :delete %>
+
+  <% else %>
+<% end %>

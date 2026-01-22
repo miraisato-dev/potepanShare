@@ -1,0 +1,11 @@
+<h1>マイ予約一覧</h1>
+
+<ul>
+  <% @reservations.each do |reservation| %>
+    <li>
+      部屋: <%= link_to reservation.room.name, room_path(reservation.room) %>  
+      期間: <%= reservation.start_date %> 〜 <%= reservation.end_date %>
+      <%= link_to "キャンセル", reservation_path(reservation), method: :delete, data: { confirm: "本当にキャンセルしますか？" }, class: "btn btn-danger btn-sm" %>
+    </li>
+  <% end %>
+</ul>

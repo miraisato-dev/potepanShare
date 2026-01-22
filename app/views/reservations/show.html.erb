@@ -1,0 +1,43 @@
+<h1>予約詳細</h1>
+
+<p>
+  <strong>部屋名：</strong>
+  <%= link_to @room.name, room_path(@room) %>
+</p>
+
+<p>
+  <strong>期間：</strong>
+  <%= @reservation.start_date %> 〜 <%= @reservation.end_date %>
+</p>
+
+<p>
+  <strong>宿泊日数：</strong>
+  <%= (@reservation.end_date - @reservation.start_date).to_i %> 泊
+</p>
+
+<p>
+  <strong>料金：</strong>
+  <%= number_to_currency(@reservation.total_price) %>
+</p>
+
+<p>
+  <strong>予約者：</strong>
+  <%= @reservation.user.name %>
+</p>
+
+<hr>
+
+<% if @reservation.user == current_user %>
+  <%= button_to "予約をキャンセル",
+      room_reservation_path(@room, @reservation),
+      method: :delete,
+      form: { "data-turbo" => "false" },
+      class: "btn btn-danger",
+      onclick: "return confirm('本当にキャンセルしますか？');" %> 
+      <%# turboのせいかlink_toだと動かず、onclickがないとconfirmされない %>
+<% end %>
+
+<%= link_to "予約一覧に戻る", room_reservations_path(@room) %>
+
+<p>予約者ID: <%= @reservation.user.id %></p>
+<p>ログインユーザーID: <%= current_user.id %></p>

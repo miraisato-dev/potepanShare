@@ -1,0 +1,33 @@
+<h1>予約を作成する</h1>
+
+<%= form_with url: confirm_room_reservations_path(@room),
+              method: :post,
+              local: true do |f| %>
+
+  <div>
+    <%= f.label :start_date, "チェックイン日" %><br>
+    <%= f.text_field :start_date, id: "start_date", placeholder: "YYYY-MM-DD", autocomplete: "off" %>
+  </div>
+
+  <div>
+    <%= f.label :end_date, "チェックアウト日" %><br>
+    <%= f.text_field :end_date, id: "end_date", placeholder: "YYYY-MM-DD", autocomplete: "off" %>
+  </div>
+
+  <%= f.submit "確認画面へ", class: "btn" %>
+<% end %>
+
+<%= link_to "部屋詳細に戻る", room_path(@room), class: "btn btn-secondary" %>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    flatpickr("#start_date", {
+      dateFormat: "Y-m-d",
+      minDate: "today"
+    });
+    flatpickr("#end_date", {
+      dateFormat: "Y-m-d",
+      minDate: "today"
+    });
+  });
+</script>

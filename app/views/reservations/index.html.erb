@@ -1,0 +1,35 @@
+<%# app/views/reservations/index.html.erb %>
+<h1>予約一覧</h1>
+
+<% if @reservations.any? %>
+  <ul>
+    <% @reservations.each do |reservation| %>
+      <li>
+        <strong>部屋：</strong>
+        <%= link_to reservation.room.name, room_path(reservation.room) %><br>
+
+        <strong>期間：</strong>
+        <%= reservation.start_date %> 〜 <%= reservation.end_date %><br>
+
+        <strong>宿泊日数：</strong>
+        <%= (reservation.end_date - reservation.start_date).to_i %> 泊<br>
+
+        <strong>料金：</strong>
+        <%= number_to_currency(reservation.total_price) %><br>
+
+        <% if reservation.user == current_user %>
+          <%= link_to "キャンセル",
+              room_reservation_path(reservation.room, reservation),
+              data: {
+                turbo_method: :delete,
+                turbo_confirm: "本当にキャンセルしますか？"
+              },
+              class: "btn btn-danger btn-sm" %>
+        <% end %>
+      </li>
+      <hr>
+    <% end %>
+  </ul>
+<% else %>
+  <p>予約はまだありません。</p>
+<% end %>

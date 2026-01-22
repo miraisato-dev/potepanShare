@@ -1,0 +1,422 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /* =========================
+     Color System
+  ========================= */
+
+    /* Base colors */
+    --color-white: #ffffff;
+    --color-black: #000000;
+
+    /* Gray scale */
+    --color-gray-50: #f9fafb;
+    --color-gray-100: #f3f4f6;
+    --color-gray-200: #e5e7eb;
+    --color-gray-300: #d1d5db;
+    --color-gray-400: #9ca3af;
+    --color-gray-500: #6b7280;
+    --color-gray-600: #4b5563;
+    --color-gray-700: #374151;
+    --color-gray-800: #1f2933;
+    --color-gray-900: #111827;
+
+    /* Brand colors */
+    --color-blue: #2563eb;
+    --color-blue-light: #60a5fa;
+    --color-blue-dark: #1e40af;
+    --color-blue-navy: #1c1d3b;
+
+    --color-green: #10b981;
+    --color-green-light: #6ee7b7;
+    --color-green-dark: #047857;
+
+    /* Semantic colors */
+    --color-green-blight: #22c55e;
+    --color-orange-blight: #f59e0b;
+    --color-red-blight: #ef4444;
+    --color-blue-blight: #0ea5e9;
+
+    /* Text colors */
+    --color-text-main: #111827;
+    --color-text-sub: #374151;
+    --color-text-muted: #6b7280;
+    --color-text-invert: #ffffff;
+
+    /* Background colors */
+    --color-bg-main: #ffffff;
+    --color-bg-sub: #f9fafb;
+    --color-bg-dark: #111827;
+
+    /* Background colors + colors*/
+    --dark-navy: #020c1b;
+    --navy: #0a192f;
+    --light-navy: #112240;
+    --lightest-navy: #233554;
+    --navy-shadow: #020c1bb3;
+    --slate: #8892b0;
+    --light-slate: #a8b2d1;
+    --lightest-slate: #ccd6f6;
+    --white: #e6f1ff;
+    --green-bright: #64ffda;
+    --green-tint: #64ffda1a;
+
+
+    /* =========================
+     Typography
+  ========================= */
+
+    /* Font family */
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-serif: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji, "Noto Serif JP", serif;
+    --font-mono: "JetBrains Mono", monospace;
+    --font-lato: "Lato", sans-serif;
+
+
+    /* Font size */
+    --font-xs: 0.75rem;
+    --font-sm: 0.875rem;
+    --font-md: 1rem;
+    --font-lg: 1.125rem;
+    --font-xl: 1.25rem;
+    --font-2xl: 1.5rem;
+    --font-3xl: 1.875rem;
+    --font-4xl: 2.25rem;
+
+    /* Font weight */
+    --font-light: 300;
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-bold: 700;
+
+    /* Line height */
+    --leading-tight: 1.25;
+    --leading-normal: 1.6;
+    --leading-loose: 1.8;
+
+
+    /* =========================
+     Spacing
+  ========================= */
+
+    --space-0: 0;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+
+
+    /* =========================
+     Layout
+  ========================= */
+
+    --content-max-width: 1200px;
+    --content-narrow-width: 720px;
+
+    /* Breakpoints */
+    --bp-sm: 480px;
+    --bp-md: 768px;
+    --bp-lg: 1024px;
+    --bp-xl: 1280px;
+
+    /* Header & Footer height */
+    --header-height: 80px;
+    --footer-height: 240px;
+
+    --logo-height-header: 32px;
+    --logo-height-footer: 40px;
+
+
+    /* =========================
+     Radius
+  ========================= */
+
+    --radius-xs: 2px;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+
+
+    /* =========================
+     Shadow
+  ========================= */
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, .05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, .1);
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, .15);
+
+
+    /* =========================
+     Z-index
+  ========================= */
+
+    --z-base: 0;
+    --z-dropdown: 100;
+    --z-header: 200;
+    --z-modal: 500;
+    --z-toast: 1000;
+
+
+    /* =========================
+     Animation
+  ========================= */
+
+    --duration-fast: 150ms;
+    --duration-normal: 300ms;
+    --duration-slow: 500ms;
+
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+
+
+
+/* =========================
+     共通
+  ========================= */
+
+.logo {
+    display: block;
+    height: 32px;
+    width: auto;
+}
+
+
+
+
+
+/* =========================
+        Layout
+  ========================= */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-lato);
+    font-size: var(--font-md);
+    line-height: var(--leading-normal);
+    color: var(--color-text-main);
+    background-color: var(--color-bg-main);
+}
+
+main {
+    flex: 1;
+}
+
+
+/* =========================
+     Header
+  ========================= */
+.header {
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32px;
+    background-color: var(--color-blue-navy);
+    color: #ffffff;
+}
+
+/* =========================
+     Navigation
+  ========================= */
+
+.nav {
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--space-10);
+    background-color: var(--color-blue-navy);
+    color: var(--text-invert);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo {
+    height: var(--logo-height-header);
+}
+
+.header-logo {
+    margin: var(--space-6);
+}
+
+.nav-link {
+    color: var(--color-white);
+    text-decoration: none;
+    margin-left: var(--space-8);
+    font-weight: var(--font-medium);
+    font-size: var(--font-xs);
+}
+
+.nav-link.new-member {
+    background-color: var(--color-red-blight);
+    color: var(--color-white);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-sm);
+}
+
+.nav-link:hover {
+    color: var(--color-blue-light);
+}
+
+/* =========================
+     Footer
+  ========================= */
+
+
+.footer {
+    height: var(--footer-height);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: var(--color-blue-navy);
+    padding-left: var(--space-10);
+}
+
+.logo-link {
+    display: inline-block;
+}
+
+.logo--footer {
+    height: 40px;
+    width: auto;
+    height: var(--logo-height-footer);
+}
+
+.copyright {
+    font-size: var(--font-sm);
+    color: var(--color-text-invert);
+    margin-top: var(--space-2);
+}
+
+
+
+
+
+
+
+
+
+
+/* =========================
+     
+app/views/home/index.html.erb  (Home Page)
+
+  ========================= */
+
+.hero {
+    height: calc(100vh - var(--header-height));
+    background-image: url("hero.jpg");
+    /* ヒーローセクションの背景画像 */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+.hero-content {
+    text-align: center;
+    color: var(--color-white);
+    max-width: 800px;
+    padding: var(--space-10);
+}
+
+
+.hero-title {
+    font-size: var(--font-4xl);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--space-4);
+}
+
+.hero-subtitle {
+    font-size: var(--font-xl);
+    line-height: var(--leading-loose);
+    margin-bottom: var(--space-8);
+}
+
+
+.hero-search form {
+    display: flex;
+    gap: var(--space-3);
+    justify-content: center;
+}
+
+.hero-input {
+    width: 280px;
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    border: none;
+    font-size: var(--font-md);
+}
+
+.hero-button {
+    padding: var(--space-3) var(--space-6);
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--font-md);
+    font-weight: var(--font-medium);
+    cursor: pointer;
+}
+
+.hero-button:hover {
+    background-color: var(--color-blue-light);
+}
