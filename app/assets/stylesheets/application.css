@@ -133,6 +133,12 @@
     --space-10: 2.5rem;
     --space-12: 3rem;
     --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+    --space-32: 8rem;
+    --space-40: 10rem;
+    --space-48: 12rem;
+    --space-56: 14rem;
 
 
     /* =========================
@@ -143,7 +149,9 @@
     --content-narrow-width: 720px;
 
     /* Breakpoints */
-    --bp-sm: 480px;
+    --bp-xs: 320px;
+    --bp-s: 480px;
+    --bp-sm: 520px;
     --bp-md: 768px;
     --bp-lg: 1024px;
     --bp-xl: 1280px;
@@ -244,6 +252,7 @@ main {
 /* =========================
      Header
   ========================= */
+
 .header {
     height: var(--header-height);
     display: flex;
@@ -311,16 +320,18 @@ main {
 
 
 .footer {
+    margin-top: var(--space-56);
     height: var(--footer-height);
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    flex-shrink: 0;
     background-color: var(--color-blue-navy);
-    padding-left: var(--space-10);
 }
 
-.logo-link {
-    display: inline-block;
+.footer-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .logo--footer {
@@ -350,16 +361,26 @@ app/views/home/index.html.erb  (Home Page)
 
   ========================= */
 
+/* =========================
+    Hero (app/views/home/index.html.erb  (Home Page))
+  ========================= */
+
 .hero {
-    height: calc(100vh - var(--header-height));
+    min-height: 100vh;
     background-image: url("hero.jpg");
-    /* ヒーローセクションの背景画像 */
     background-size: cover;
     background-position: center;
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0.7);
 }
 
 /* .hero-overlay {
@@ -419,4 +440,60 @@ app/views/home/index.html.erb  (Home Page)
 
 .hero-button:hover {
     background-color: var(--color-blue-light);
+}
+
+
+
+
+
+
+
+/* =========================
+Recommended Areas (app/views/home/index.html.erb  (Home Page))
+  ========================= */
+
+.recommended-areas {
+    margin-top: var(--space-56);
+}
+
+
+.area-cards {
+    margin-top: var(--space-24);
+    display: flex;
+    gap: var(--space-8);
+    justify-content: center;
+}
+
+.area-card {
+    width: var(--bp-xs);
+    height: var(--bp-sm);
+    /* 540px */
+    border-radius: var(--radius-xl);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.area-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.area-img.tokyo {
+    background-image: url("tokyo.jpg");
+}
+
+.area-img.osaka {
+    background-image: url("osaka.jpg");
+}
+
+.area-img.kyoto {
+    background-image: url("kyoto.jpg");
+}
+
+.area-img.sapporo {
+    background-image: url("sapporo.jpg");
 }

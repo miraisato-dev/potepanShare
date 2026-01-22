@@ -23,6 +23,33 @@
       </div>
     </section>
 
+    <section class="recommended-areas">
+      <h2 class="section-title">おすすめのエリア</h2>
+
+      <div class="area-cards">
+        <div class="area-card">
+          <p>東京</p>
+          <div class="area-img tokyo" style="background-image: url(<%= asset_path('tokyo.jpg') %>)"></div>
+        </div>
+
+        <div class="area-card">
+          <p>大阪</p>
+          <div class="area-img osaka" style="background-image: url(<%= asset_path('osaka.jpg') %>)"></div>
+        </div>
+
+        <div class="area-card">
+          <p>京都</p>
+          <div class="area-img kyoto" style="background-image: url(<%= asset_path('kyoto.jpg') %>)"></div>
+        </div>
+
+        <div class="area-card">
+          <p>札幌</p>
+          <div class="area-img sapporo" style="background-image: url(<%= asset_path('sapporo.jpg') %>)"></div>
+        </div>
+
+      </div>
+    </section>
+
 <% if current_user %><%# sectionより下に書くこと ロクインしていない状態で見れなくなる %>
   <p>Logged in as <%= current_user.name %></p>
 
