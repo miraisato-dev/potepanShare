@@ -9,18 +9,13 @@ Rails.application.routes.draw do
   post   "/login",  to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  # 部屋検索と予約フロー
+  # 部屋関連
   resources :rooms, only: [ :new, :create, :index, :show ] do
+  resources :reservations, only: [ :index, :create, :destroy ] do
     collection do
-      get :search
+      match :confirm, via: [ :get, :post ]
     end
-
-    # 部屋ごとの予約管理
-    resources :reservations, only: [ :index, :create, :destroy ] do
-      collection do
-        match :confirm, via: [ :get, :post ]
-      end
-    end
+  end
   end
 
   # ユーザー全体の予約一覧

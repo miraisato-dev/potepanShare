@@ -1,21 +1,15 @@
+# app/controllers/rooms_controller.rb
 class RoomsController < ApplicationController
   before_action :require_login, only: [ :new, :create ]
 
-  # 部屋一覧
+  # 部屋一覧・検索
   def index
     @rooms = Room.all
-  end
 
-  # 部屋検索
-  def search
-    @rooms = Room.all
-
-    # エリア検索（住所のあいまい検索）
     if params[:area].present?
       @rooms = @rooms.where("address LIKE ?", "%#{params[:area]}%")
     end
 
-    # フリーワード検索（施設名・詳細）
     if params[:keyword].present?
       @rooms = @rooms.where(
         "name LIKE ? OR description LIKE ?",
@@ -24,6 +18,25 @@ class RoomsController < ApplicationController
       )
     end
   end
+
+  # # 部屋検索
+  # def search
+  #   @rooms = Room.all
+
+  #   # エリア検索（住所のあいまい検索）
+  #   if params[:area].present?
+  #     @rooms = @rooms.where("address LIKE ?", "%#{params[:area]}%")
+  #   end
+
+  #   # フリーワード検索（施設名・詳細）
+  #   if params[:keyword].present?
+  #     @rooms = @rooms.where(
+  #       "name LIKE ? OR description LIKE ?",
+  #       "%#{params[:keyword]}%",
+  #       "%#{params[:keyword]}%"
+  #     )
+  #   end
+  # end
 
   # 部屋登録画面
   def new

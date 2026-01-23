@@ -318,9 +318,8 @@ main {
      Footer
   ========================= */
 
-
 .footer {
-    margin-top: var(--space-56);
+    margin-top: 0;
     height: var(--footer-height);
     flex-shrink: 0;
     background-color: var(--color-blue-navy);
@@ -454,14 +453,25 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
 
 .recommended-areas {
     margin-top: var(--space-56);
+    width: 90%;
+    max-width: var(--content-max-width);
+    margin-left: auto;
+    margin-right: auto;
 }
 
+.recommended-areas h2 {
+    font-size: var(--font-3xl);
+    font-weight: var(--font-bold);
+    width: fit-content;
+    border-bottom: #ef4444 4px solid;
+}
 
 .area-cards {
     margin-top: var(--space-24);
     display: flex;
     gap: var(--space-8);
     justify-content: center;
+    text-align: center;
 }
 
 .area-card {
@@ -473,6 +483,22 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
     background-position: center;
     position: relative;
     overflow: hidden;
+    font-weight: var(--font-bold);
+}
+
+.area-card p {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    margin: 0;
+    padding: var(--space-2) var(--space-4);
+    background-color: rgba(243, 243, 243, 0.5);
+    color: var(--color-black);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
 }
 
 .area-img {
@@ -480,6 +506,13 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
     height: 100%;
     background-size: cover;
     background-position: center;
+}
+
+svg {
+    width: 24px;
+    height: 24px;
+    fill: inherit;
+    vertical-align: middle;
 }
 
 .area-img.tokyo {
@@ -496,4 +529,115 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
 
 .area-img.sapporo {
     background-image: url("sapporo.jpg");
+}
+
+
+/* =========================
+    Footer Adjustment for Home Page (app/views/home/index.html.erb  (Home Page))
+     .footer共通で余白なし、ホームページのみ余白あり
+      ========================= */
+
+.home-page .footer {
+    margin-top: var(--space-56);
+}
+
+
+/* =========================
+   Auth (Login / Register)　
+（app/views/devise/sessions/new.html.erb, app/views/users/new.html.erb ログイン＆新規登録画面）
+========================= */
+
+.auth-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-bg-sub);
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-20);
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.auth-title {
+    text-align: center;
+    font-size: var(--font-2xl);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--space-8);
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: var(--font-sm);
+    margin-bottom: var(--space-1);
+    color: var(--color-text-sub);
+}
+
+.form-input {
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-gray-300);
+    font-size: var(--font-md);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--color-blue);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.auth-button {
+    margin-top: var(--space-4);
+    padding: 14px;
+    background-color: var(--color-blue);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--font-md);
+    font-weight: var(--font-medium);
+    cursor: pointer;
+}
+
+.auth-button:hover {
+    background-color: var(--color-blue-light);
+}
+
+.auth-link {
+    margin-top: var(--space-6);
+    text-align: center;
+    font-size: var(--font-sm);
+}
+
+.form-errors {
+    background-color: #fee2e2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-6);
+    font-size: var(--font-sm);
+}
+
+.form-errors ul {
+    list-style: none;
+}
+
+.form-errors li {
+    margin-bottom: 4px;
 }
