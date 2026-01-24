@@ -1,39 +1,42 @@
-<h1>マイ予約一覧</h1>
-
-<% if @reservations.any? %>
-  <% @reservations.each do |reservation| %>
-    <div class="card mb-3 p-3">
-      <h3>
-        <%= link_to reservation.room.name, room_path(reservation.room) %>
-      </h3>
-
-      <p>
-        <strong>チェックイン：</strong>
-        <%= reservation.start_date.strftime("%Y/%m/%d") %><br>
-        <strong>チェックアウト：</strong>
-        <%= reservation.end_date.strftime("%Y/%m/%d") %>
-      </p>
-
-      <p>
-        <strong>宿泊日数：</strong>
-        <%= (reservation.end_date - reservation.start_date).to_i %> 泊
-      </p>
-
-      <p>
-        <strong>合計料金：</strong>
-        <%= number_to_currency(reservation.total_price) %>
-      </p>
-
-      <%= link_to "キャンセル",
-          room_reservation_path(reservation.room, reservation),
-          data: {
-            turbo_method: :delete,
-            turbo_confirm: "本当にキャンセルしますか？"
-          },
-          class: "btn btn-danger btn-sm" %>
-    </div>
+<%# app/views/reservations/my_index.html.erb %>
+<div class="page-container">
+  <h1>マイ予約一覧</h1>
+  
+  <% if @reservations.any? %>
+    <% @reservations.each do |reservation| %>
+      <div class="card mb-3 p-3">
+        <h3>
+          <%= link_to reservation.room.name, room_path(reservation.room) %>
+        </h3>
+  
+        <p>
+          <strong>チェックイン：</strong>
+          <%= reservation.start_date.strftime("%Y/%m/%d") %><br>
+          <strong>チェックアウト：</strong>
+          <%= reservation.end_date.strftime("%Y/%m/%d") %>
+        </p>
+  
+        <p>
+          <strong>宿泊日数：</strong>
+          <%= (reservation.end_date - reservation.start_date).to_i %> 泊
+        </p>
+  
+        <p>
+          <strong>合計料金：</strong>
+          <%= number_to_currency(reservation.total_price) %>
+        </p>
+  
+        <%= link_to "キャンセル",
+            room_reservation_path(reservation.room, reservation),
+            data: {
+              turbo_method: :delete,
+              turbo_confirm: "本当にキャンセルしますか？"
+            },
+            class: "btn btn-danger btn-sm" %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>予約はまだありません。</p>
   <% end %>
-<% else %>
-  <p>予約はまだありません。</p>
-<% end %>
-<%= link_to "部屋一覧に戻る", rooms_path, class: "btn btn-secondary" %>
+  <%= link_to "部屋一覧に戻る", rooms_path, class: "btn btn-secondary" %>
+</div>

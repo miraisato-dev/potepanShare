@@ -6,10 +6,12 @@ class RoomsController < ApplicationController
   def index
     @rooms = Room.all
 
+    # エリア検索
     if params[:area].present?
       @rooms = @rooms.where("address LIKE ?", "%#{params[:area]}%")
     end
 
+    # フリーワード検索（施設名・詳細）
     if params[:keyword].present?
       @rooms = @rooms.where(
         "name LIKE ? OR description LIKE ?",
@@ -63,6 +65,12 @@ class RoomsController < ApplicationController
 
   # 部屋パラメータ
   def room_params
-    params.require(:room).permit(:name, :description, :price, :address)
+    params.require(:room).permit(
+      :name,
+      :description,
+      :price,
+      :address,
+      :image
+    )
   end
 end

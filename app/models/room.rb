@@ -1,8 +1,14 @@
 # app/models/room.rb
 class Room < ApplicationRecord
-  has_many :reservations, dependent: :destroy
   belongs_to :user
   has_one_attached :image
+  has_many :reservations, dependent: :destroy
+
+  validates :price, numericality: { greater_than_or_equal_to: 0, message: "は0以上で入力してください" }
+  validates :name, presence: true
+  # validates :area, presence: true
+  # validates :description, presence: true
+  # validates :address, presence: true
 
   # 予約済みの日付配列を返す
   def booked_dates

@@ -1,3 +1,4 @@
+<%# app/views/layouts/application.html.erb %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -22,39 +23,37 @@
   </head>
 
   <body class="<%= 'home-page' if current_page?(root_path) %>">
-    <% if notice %>
-      <div class="alert alert-success">
-        <%= notice %>
-      </div>
-    <% end %>
-
-    <% if alert %>
-      <div class="alert alert-danger">
-        <%= alert %>
-      </div>
-    <% end %>
-
-    <%# <% if current_user %>
-     <%# <%= link_to "予約一覧", reservations_path %>
-    <%#<% end %>
 
     <header class="header">
-      <!-- ロゴ（ホームへ） -->
-        <div class="nav-left">
-          <!-- ロゴ画像（ホームへ） -->
-          <%= link_to root_path, class: "logo-link header-logo" do %>
-            <%= image_tag "logo.png", alt: "Potepan Share", class: "logo" %>
-          <% end %>
-        </div>
+      <div class="nav-left">
+        <%= link_to root_path, class: "logo-link header-logo" do %>
+          <%= image_tag "logo.png", alt: "Potepan Share", class: "logo" %>
+        <% end %>
+      </div>
+
       <nav class="nav">
-        <!-- 右側メニュー -->
         <div class="nav-right">
           <% if current_user %>
-            <%= link_to "マイ予約一覧", my_reservations_path, class: "nav-link" %>
-            <%= link_to "ログアウト",
-                        logout_path,
-                        data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" },
-                        class: "nav-link" %>
+            <!-- ユーザーメニュー(ログインしている時のみ表示される) -->
+            <div class="user-menu">
+              <%= image_tag current_user.avatar.attached? ? current_user.avatar : "default_user.png",
+                            class: "user-avatar" %>
+              <span class="user-name"><%= current_user.name %></span>
+              <span class="user-dropdown">&#9662;</span> <!-- 下矢印 -->
+
+              <ul class="user-dropdown-menu">
+                <li><%= link_to "施設の新規登録", new_room_path %></li>
+                <li><%= link_to "マイ予約一覧", my_reservations_path %></li>
+                <li><%= link_to "登録済み一覧", rooms_path %></li>
+                <li><%= link_to "アカウント設定変更", edit_user_path(current_user) %></li>
+                <li>
+                  <%= link_to "ログアウト",
+                              logout_path,
+                              data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" } %>
+                </li>
+              </ul>
+            </div>
+            <!-- ユーザーメニュー終わり -->
           <% else %>
             <%= link_to "ログイン", login_path, class: "nav-link" %>
             <%= link_to "新規登録", new_user_path, class: "nav-link new-member" %>
@@ -63,8 +62,21 @@
       </nav>
     </header>
 
+    <%# フラッシュメッセージ表示 %>
+      <% if notice %>
+        <div class="flash-message notice">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="flash-message alert">
+          <%= alert %>
+        </div>
+      <% end %>
+
     <main class="main">
-      <%= yield %>
+        <%= yield %>
     </main>
 
     <footer class="footer">

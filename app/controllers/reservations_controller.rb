@@ -1,3 +1,4 @@
+# app/controllers/reservations_controller.rb
 class ReservationsController < ApplicationController
   before_action :require_login
   before_action :set_room, only: [ :new, :confirm, :create, :show, :destroy ]
@@ -71,14 +72,9 @@ class ReservationsController < ApplicationController
 
   # キャンセル
   def destroy
-    @reservation = @room.reservations.find(params[:id])
-
-    if @reservation.user == current_user
-      @reservation.destroy
-      redirect_to room_reservations_path(@room), notice: "予約をキャンセルしました"
-    else
-      redirect_to room_reservations_path(@room), alert: "権限がありません"
-    end
+    @reservation = current_user.reservations.find(params[:id])
+    @reservation.destroy
+    redirect_to my_reservations_path, notice: "予約をキャンセルしました"
   end
 
   private

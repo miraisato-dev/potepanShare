@@ -1,28 +1,63 @@
 <%# app/views/rooms/index.html.erb %>
-<h1>
-  <%= params[:area].present? || params[:keyword].present? ? "検索結果" : "部屋一覧" %>
-</h1>
-
-<%= link_to "新規作成", new_room_path, class: "btn btn-primary" %>
-
-<ul class="rooms">
-  <% @rooms.each do |room| %>
-    <li class="room-card">
-      <% if room.image.attached? %>
-        <%= image_tag room.image, class: "room-image" %>
-      <% else %>
-        <%= image_tag "default_room.png", class: "room-image" %>
+<div class="page-outer-container">
+  <%# --- 検索フォームナビ --- %>
+    <div class="search-nav mb-4 p-3 border rounded bg-light">
+      <%= form_with url: rooms_path, method: :get, local: true do |f| %>
+        <div class="form-row d-flex align-items-center">
+          <%# エリア検索ドロップダウン %>
+          <div class="form-group mr-3">
+            <%= f.select :area, options_for_select([["東京", "東京"], ["大阪", "大阪"], ["京都", "京都"], ["札幌", "札幌"]], params[:area]), include_blank: "すべて" %>
+          </div>
+  
+          <%# フリーワード検索 %>
+          <div class="form-group mr-3">
+            <%= f.text_field :keyword, value: params[:keyword], placeholder: "施設名・詳細を検索" %>
+          </div>
+  
+          <div class="form-group align-self-end">
+            <%= f.submit "検索", class: "btn btn-primary" %>
+          </div>
+        </div>
       <% end %>
+    </div>
 
-      <div class="room-info">
-        <h3><%= link_to room.name, room_path(room) %></h3>
-        <p><%= room.address %></p>
-        <p><%= number_to_currency(room.price) %> / 泊</p>
-      </div>
-    </li>
-  <% end %>
-</ul>
+  <div class="page-container">
+    <%# <h1>
+      <%= params[:area].present? || params[:keyword].present? ? "検索結果" : "部屋一覧"
+    </h1> %>
+    
+     <h1>
+        <% if params[:area].present? || params[:keyword].present? %>
+          検索結果：<%= @rooms.count %>件が見つかりました
+        <% else %>
+          部屋一覧
+        <% end %>
+      </h1>
+  
+    <%# --- 部屋カード表示 --- %>
+    <ul class="rooms  d-flex flex-wrap list-unstyled">
+      <% @rooms.each do |room| %>
+        <li class="room-card  m-2 p-2 border rounded" style="width: 30%;">
+          <% if room.image.attached? %>
+            <%= image_tag room.image, class: "room-image", style: "width:100%; height:auto;" %>
+          <% else %>
+            <%= image_tag "default_room.png", class: "room-image", style: "width:100%; height:auto;" %>
+          <% end %>
+    
+          <div class="room-info mt-2">
+            <h3><%= link_to room.name, room_path(room) %></h3>
+            <p><%= room.address %></p>
+            <p><%= number_to_currency(room.price) %> / 泊</p>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+    
+    <% if @rooms.empty? %>
+      <p>条件に一致する施設がありません</p>
+    <% end %>
+  
+  <%= link_to "新規作成", new_room_path, class: "btn btn-primary" %>
 
-<% if @rooms.empty? %>
-  <p>条件に一致する施設がありません</p>
-<% end %>
+  </div>
+</div>

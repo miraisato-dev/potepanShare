@@ -1,0 +1,16 @@
+<%# app/views/users/account.html.erb %>
+<%= render 'settings_layout' do %>
+  <h2>アカウント</h2>
+
+  <div class="account-row">
+    <span>メールアドレス</span>
+    <span><%= current_user.email %></span>
+  </div>
+
+  <div class="account-row">
+    <span>パスワード</span>
+    <span>********</span>
+  </div>
+
+  <%= link_to '編集', edit_users_path, class: 'btn-edit' %>
+<% end %>

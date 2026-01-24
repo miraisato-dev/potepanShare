@@ -1,0 +1,23 @@
+<!-- app/views/users/edit_profile.html.erb -->
+<%= render 'settings_layout' do %>
+  <h2>プロフィール編集</h2>
+
+  <%= form_with model: @user, url: update_profile_path, local: true do |f| %>
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div>
+      <%= f.label :bio %>
+      <%= f.text_area :bio %>
+    </div>
+
+    <div>
+      <%= f.label :avatar %>
+      <%= f.file_field :avatar %>
+    </div>
+
+    <%= f.submit "更新", class: "auth-button" %>
+  <% end %>
+<% end %>

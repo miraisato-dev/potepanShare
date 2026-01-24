@@ -27,47 +27,51 @@
       <h2 class="section-title">おすすめのエリア</h2>
 
       <div class="area-cards">
-        <div class="area-card">
+        <%= link_to rooms_path(area: "東京"),
+                class: "area-card",
+                style: "background-image: url(#{asset_path('tokyo.jpg')})" do %>
           <p>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="area-icon"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
           <path d="M128 252.6C128 148.4 214 64 320 64C426 64 512 148.4 512 252.6C512 371.9 391.8 514.9 341.6 569.4C329.8 582.2 310.1 582.2 298.3 569.4C248.1 514.9 127.9 371.9 127.9 252.6zM320 320C355.3 320 384 291.3 384 256C384 220.7 355.3 192 320 192C284.7 192 256 220.7 256 256C256 291.3 284.7 320 320 320z"/></svg>
-          東京
+          東京 Tokyo
           </p>
-          <div class="area-img tokyo" style="background-image: url(<%= asset_path('tokyo.jpg') %>)"></div>
-        </div>
+=        <% end %>
 
-        <div class="area-card">
+        <%= link_to rooms_path(area: "大阪"),
+                class: "area-card",
+                style: "background-image: url(#{asset_path('osaka.jpg')})" do %>
           <p>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="area-icon"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
           <path d="M128 252.6C128 148.4 214 64 320 64C426 64 512 148.4 512 252.6C512 371.9 391.8 514.9 341.6 569.4C329.8 582.2 310.1 582.2 298.3 569.4C248.1 514.9 127.9 371.9 127.9 252.6zM320 320C355.3 320 384 291.3 384 256C384 220.7 355.3 192 320 192C284.7 192 256 220.7 256 256C256 291.3 284.7 320 320 320z"/></svg>
-          大阪
+          大阪 Osaka
           </p>
-          <div class="area-img osaka" style="background-image: url(<%= asset_path('osaka.jpg') %>)"></div>
-        </div>
+        <% end %>
 
-        <div class="area-card">
+        <%= link_to rooms_path(area: "京都"),
+                class: "area-card",
+                style: "background-image: url(#{asset_path('kyoto.jpg')})" do %>
           <p>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="area-icon"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
           <path d="M128 252.6C128 148.4 214 64 320 64C426 64 512 148.4 512 252.6C512 371.9 391.8 514.9 341.6 569.4C329.8 582.2 310.1 582.2 298.3 569.4C248.1 514.9 127.9 371.9 127.9 252.6zM320 320C355.3 320 384 291.3 384 256C384 220.7 355.3 192 320 192C284.7 192 256 220.7 256 256C256 291.3 284.7 320 320 320z"/></svg>
-          京都
+          京都 Kyoto
           </p>
-          <div class="area-img kyoto" style="background-image: url(<%= asset_path('kyoto.jpg') %>)"></div>
-        </div>
+        <% end %>
 
-        <div class="area-card">
+        <%= link_to rooms_path(area: "札幌"),
+                class: "area-card",
+                style: "background-image: url(#{asset_path('sapporo.jpg')})" do %>
           <p>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="area-icon"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
           <path d="M128 252.6C128 148.4 214 64 320 64C426 64 512 148.4 512 252.6C512 371.9 391.8 514.9 341.6 569.4C329.8 582.2 310.1 582.2 298.3 569.4C248.1 514.9 127.9 371.9 127.9 252.6zM320 320C355.3 320 384 291.3 384 256C384 220.7 355.3 192 320 192C284.7 192 256 220.7 256 256C256 291.3 284.7 320 320 320z"/></svg>
-          札幌
+          札幌 Sapporo
           </p>
-          <div class="area-img sapporo" style="background-image: url(<%= asset_path('sapporo.jpg') %>)"></div>
-        </div>
+        <% end %>
 
       </div>
     </section>
 
 <% if current_user %><%# sectionより下に書くこと ロクインしていない状態で見れなくなる %>
-  <p>Logged in as <%= current_user.name %></p>
+  <%# <p>Logged in as <%= current_user.name %><%# </p>
 
   <%= button_to "Logout", logout_path, method: :delete %>
 

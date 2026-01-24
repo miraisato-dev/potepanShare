@@ -68,6 +68,7 @@
     /* Background colors */
     --color-bg-main: #ffffff;
     --color-bg-sub: #f9fafb;
+    --color-bg-gray: rgba(238, 238, 238, 0.94);
     --color-bg-dark: #111827;
 
     /* Background colors + colors*/
@@ -145,7 +146,9 @@
      Layout
   ========================= */
 
-    --content-max-width: 1200px;
+    --content-max-width: 1400px;
+    --content-wide-width: 1200px;
+    --content-medium-width: 960px;
     --content-narrow-width: 720px;
 
     /* Breakpoints */
@@ -221,12 +224,14 @@
     width: auto;
 }
 
-
-
+a,
+button {
+    cursor: pointer;
+}
 
 
 /* =========================
-        Layout
+        Layout (app/views/layout/application.html.erb)
   ========================= */
 
 html,
@@ -313,6 +318,60 @@ main {
 .nav-link:hover {
     color: var(--color-blue-light);
 }
+
+/* ユーザーメニュー欄 */
+
+.user-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.user-name {
+    margin-right: 4px;
+    font-weight: bold;
+}
+
+.user-dropdown {
+    font-size: 0.7em;
+}
+
+.user-dropdown-menu {
+    display: none;
+    /* 初期は非表示 */
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    list-style: none;
+    padding: 8px 0;
+    min-width: 180px;
+    z-index: 1000;
+}
+
+.user-dropdown-menu li {
+    padding: 8px 16px;
+}
+
+.user-dropdown-menu li:hover {
+    background-color: #f0f0f0;
+}
+
+/* ホバーで表示 */
+.user-menu:hover .user-dropdown-menu {
+    display: block;
+}
+
 
 /* =========================
      Footer
@@ -483,22 +542,21 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
     background-position: center;
     position: relative;
     overflow: hidden;
+    /* 画像のはみ出し防止 */
     font-weight: var(--font-bold);
 }
 
 .area-card p {
     position: absolute;
-    top: var(--space-4);
-    left: var(--space-4);
+    bottom: var(--space-4);
+    left: var(--space-2);
     margin: 0;
     padding: var(--space-2) var(--space-4);
-    background-color: rgba(243, 243, 243, 0.5);
-    color: var(--color-black);
+    color: var(--color-white);
     border-radius: var(--radius-sm);
     font-size: var(--font-lg);
     display: flex;
     align-items: center;
-    gap: var(--space-2);
 }
 
 .area-img {
@@ -508,27 +566,11 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
     background-position: center;
 }
 
-svg {
+.area-icon {
     width: 24px;
     height: 24px;
-    fill: inherit;
+    fill: var(--color-white);
     vertical-align: middle;
-}
-
-.area-img.tokyo {
-    background-image: url("tokyo.jpg");
-}
-
-.area-img.osaka {
-    background-image: url("osaka.jpg");
-}
-
-.area-img.kyoto {
-    background-image: url("kyoto.jpg");
-}
-
-.area-img.sapporo {
-    background-image: url("sapporo.jpg");
 }
 
 
@@ -578,9 +620,14 @@ svg {
     gap: var(--space-6);
 }
 
-.form-group {
+/* auth (login / new) 用は元に戻す */
+.auth-card .form-group {
+    width: 100%;
+    padding: 0;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    /* 高さ揃え */
 }
 
 .form-group label {
@@ -640,4 +687,107 @@ svg {
 
 .form-errors li {
     margin-bottom: 4px;
+}
+
+
+
+/* =========================
+     Page 共通CSS
+========================= */
+
+.page-container {
+    max-width: var(--content-max-width);
+    /* 例: 1200px */
+    width: 100%;
+    /* 画面幅に応じて柔軟に */
+    margin-top: var(--space-8);
+    margin-left: auto;
+    margin-right: auto;
+    padding: var(--space-6) 0;
+    /* 上下の余白 */
+}
+
+
+/*  
+*/
+.search-nav {
+    background-color: var(--color-bg-gray);
+}
+
+/* rooms/index 用 */
+.rooms .form-group {
+    width: var(--bp-s);
+    padding: var(--space-16);
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
+/* app/view/index.html/erb */
+
+/* rooms-cardを横に並ばせはみ出たものは次の行 */
+.rooms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    /* カード間の間隔 */
+    padding: 0;
+}
+
+.room-card {
+    flex: 1 1 calc(33.333% - 16px);
+    /* 横3列、gap分を引く */
+    background-color: var(--color-bg-gray);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    /* marginは.roomsへのgapで管理するので不要 */
+}
+
+
+.room-info {
+    margin: var(--space-5);
+}
+
+
+
+
+
+
+/* =========================
+     Flash Messages
+========================= */
+
+.flash-message {
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    font-size: var(--font-sm);
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-2);
+    max-width: var(--max-width);
+    /* コンテンツ幅に合わせる 1200px */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* 成功メッセージ（notice） */
+.flash-message.notice {
+    background-color: var(--color-green-light);
+    /* 薄い緑 */
+    color: var(--color-green-dark);
+    /* 濃い緑 */
+    border: 1px solid var(--color-green);
+}
+
+/* エラーメッセージ（alert） */
+.flash-message.alert {
+    background-color: var(--color-red-light);
+    /* 薄い赤 */
+    color: var(--color-red-dark);
+    /* 濃い赤 */
+    border: 1px solid var(--color-red);
 }
