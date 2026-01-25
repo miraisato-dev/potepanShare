@@ -1,23 +1,36 @@
-<%# app/views/users/edit_account.html.erb %>
-<%= render 'settings_layout' do %>
-  <h2>アカウント情報編集</h2>
+<%# app/views/users/account.html.erb %>
+<div class="page-container">
+  <%= render "settings_layout" do %>
+    <h2>アカウント</h2>
+    
+    <!-- メールアドレス -->
+    <%= form_with model: @user, url: account_path, method: :patch do |f| %>
+      <div>
+        <%= f.label :email, "メールアドレス" %>
+        <%= f.email_field :email %>
+      </div>
 
-  <%= form_with model: @user, url: update_account_path, local: true do |f| %>
-    <div>
-      <%= f.label :email %>
-      <%= f.email_field :email, class: "form-input" %>
-    </div>
+    <!-- パスワード -->
+      <div>
+        <%= f.label :password, "パスワード" %>
+        <%= f.password_field :password, autocomplete: "new-password" %>
+        <small>※変更する場合のみ入力</small>
+      </div>
 
-    <div>
-      <%= f.label :password %>
-      <%= f.password_field :password, class: "form-input" %>
-    </div>
+    <!-- 確認用パスワード -->
+      <div>
+        <%= f.label :password_confirmation, "確認用パスワード" %>
+        <%= f.password_field :password_confirmation %>
+        <small>※変更する場合のみ入力</small>
+      </div>
 
-    <div>
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, class: "form-input" %>
-    </div>
+    <!-- 現在のパスワード -->
+      <div>
+        <%= f.label :current_password, "現在のパスワード" %>
+        <%= f.password_field :current_password %>
+      </div>
+      <% end %>
 
-    <%= f.submit "更新", class: "auth-button" %>
   <% end %>
-<% end %>
+</div>
+

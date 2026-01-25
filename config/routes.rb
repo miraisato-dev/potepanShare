@@ -6,12 +6,15 @@ Rails.application.routes.draw do
   # ユーザー登録
   resources :users, only: [ :new, :create, :edit, :update ]
 
-  # アカウント情報編集
-  get "/account/edit", to: "users#edit_account", as: :edit_account
-  patch "/account", to: "users#update_account", as: :update_account
-  # プロフィール編集
-  get "/profile/edit", to: "users#edit_profile", as: :edit_profile
-  patch "/profile", to: "users#update_profile", as: :update_profile
+  # アカウント
+  get  "/account",      to: "users#account",      as: :account
+  get  "/account/edit", to: "users#edit_account", as: :edit_account
+  patch "/account",     to: "users#update_account"
+
+  # プロフィール
+  get  "/profile",      to: "users#profile",      as: :profile
+  get  "/profile/edit", to: "users#edit_profile", as: :edit_profile
+  patch "/profile",     to: "users#update_profile"
 
   # ログイン/ログアウト
   get    "/login",  to: "sessions#new"

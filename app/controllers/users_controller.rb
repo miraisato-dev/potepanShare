@@ -1,7 +1,7 @@
 # app/controllers/users_controller.rb
 class UsersController < ApplicationController
-  before_action :set_user, only: [ :edit, :update, :edit_account, :update_account, :edit_profile, :update_profile]   # edit/update用に@userをセット
-  before_action :require_login, only: [ :edit, :update, :edit_account, :update_account, :edit_profile, :update_profile] # ログイン必須
+  before_action :set_user, only: [ :edit, :update, :edit_account, :update_account, :edit_profile, :update_profile, :profile ]   # edit/update用に@userをセット
+  before_action :require_login, only: [ :edit, :update, :edit_account, :update_account, :edit_profile, :update_profile, :profile ] # ログイン必須
 
   # 新規登録画面
   def new
@@ -46,16 +46,27 @@ class UsersController < ApplicationController
     end
   end
 
+  # プロフィール
+  def profile
+    @user = current_user
+    @reservations = @user.reservations.includes(:room).order(start_date: :desc)
+  end
+
   # 新規追加：プロフィール編集
   def edit_profile
   end
 
+  #
   def update_profile
     if @user.update(profile_params)
       redirect_to edit_profile_path, notice: "プロフィールを更新しました"
     else
       render :edit_profile, status: :unprocessable_entity
     end
+  end
+
+  def account
+    @user = current_user
   end
 
   private
@@ -76,9 +87,12 @@ class UsersController < ApplicationController
     )
   end
 
-  def my_page
-    @user = current_user
-    @reservations = @user.reservations.includes(:room).order(start_date: :desc)
+  def profile_params
+    params.require(:user).permit(
+      :name,
+      :bio,
+      :avatar
+    )
   end
 
   # update用アクションは既存のupdateを使用する
