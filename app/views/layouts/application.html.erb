@@ -44,7 +44,7 @@
               <ul class="user-dropdown-menu">
                 <li><%= link_to "施設の新規登録", new_room_path %></li>
                 <li><%= link_to "マイ予約一覧", my_reservations_path %></li>
-                <li><%= link_to "登録済み一覧", rooms_path %></li>
+                <li><%= link_to "登録済み一覧", my_rooms_path  %></li>
                 <li><%= link_to "アカウント設定", account_path %></li>
                 <%# <li><%= link_to "プロフィール", profile_path</li> %> 
                 <li>
@@ -76,8 +76,12 @@
         </div>
       <% end %>
 
+      <%= yield :full_width %>  <!-- ★ search-nav 用 -->
+
     <main class="main">
-        <%= yield %>
+        <div class="page-container">
+          <%= yield %>              <!-- ★ 通常ページ -->
+        </div>
     </main>
 
     <footer class="footer">

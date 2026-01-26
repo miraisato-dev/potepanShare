@@ -11,10 +11,10 @@ class Reservation < ApplicationRecord
   private
 
   def calculate_total_price
-    return if start_date.blank? || end_date.blank? || room.blank?
+    return if start_date.blank? || end_date.blank? || room.blank? || guest_count.blank?
 
     nights = (end_date - start_date).to_i
-    self.total_price = nights * room.price
+    self.total_price = nights * room.price * guest_count
   end
 
   def start_before_end

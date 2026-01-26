@@ -1,19 +1,16 @@
 <!-- app/views/users/_settings_layout.html.erb -->
-<div class="page-container">
-  <div class="settings">
-    <aside class="settings-menu">
-      <%= link_to 'アカウント',
-        account_path,
-        class: ('active' if current_page?(account_path)) %>
+<div class="settings">
+  <aside class="settings-menu">
+    <%= link_to 'アカウント',
+      account_path,
+      class: ('active' if current_page?(account_path)) %>
   
-      <%= link_to 'プロフィール',
+    <%= link_to 'プロフィール',
         profile_path,
         class: ('active' if current_page?(profile_path)) %>
     </aside>
   
     <div class="settings-content">
-      <%= yield %>
-    </div>
+    <%= yield %>
   </div>
-  
 </div>

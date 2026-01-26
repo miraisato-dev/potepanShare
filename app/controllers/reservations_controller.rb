@@ -45,7 +45,7 @@ class ReservationsController < ApplicationController
 
     if @reservation.save
       session.delete(:reservation) # 二重送信防止
-      redirect_to room_path(@room), notice: "予約が完了しました" # turbo対応につきredirect_toは必須
+      redirect_to my_reservations_path, notice: "予約が完了しました" # turbo対応につきredirect_toは必須
     else
       flash.now[:alert] = @reservation.errors.full_messages.join(", ")
       render :confirm, status: :unprocessable_entity
@@ -62,7 +62,7 @@ class ReservationsController < ApplicationController
 
   # ユーザー全体の予約一覧
   def my_index
-    @reservations = current_user.reservations.includes(:room).order(start_date: :desc)
+    @reservations = current_user.reservations.includes(:room).order(created_at: :desc)
   end
 
   # 予約詳細
@@ -86,10 +86,11 @@ class ReservationsController < ApplicationController
   def reservation_params
     return {} if params[:reservation].blank?
 
-    raw = params.require(:reservation).permit(:start_date, :end_date)
+    raw = params.require(:reservation).permit(:start_date, :end_date, :guest_count)
     {
       start_date: raw[:start_date].present? ? Date.parse(raw[:start_date]) : nil,
-      end_date:   raw[:end_date].present?   ? Date.parse(raw[:end_date])   : nil
+      end_date:   raw[:end_date].present?   ? Date.parse(raw[:end_date])   : nil,
+      guest_count: raw[:guest_count]
     }
   end
 end

@@ -1,0 +1,66 @@
+<h1 class="page-title">登録済みの部屋一覧</h1>
+
+<%= link_to "新規部屋を登録", new_room_path, class: "btn btn-primary mb-3" %>
+
+<% if @rooms.any? %>
+  <div class="table-wrapper">
+    <table class="rooms-table">
+      <thead>
+        <tr>
+          <th>画像</th>
+          <th>施設名</th>
+          <th>紹介文</th>
+          <th>料金</th>
+          <th>作成日</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @rooms.each do |room| %>
+          <tr>
+            <%# 画像 %>
+            <td>
+              <% if room.image.attached? %>
+                <%= image_tag room.image.variant(resize_to_limit: [100, 100]), alt: room.name %>
+              <% else %>
+                <%= image_tag "default_room.png", alt: "画像なし", width: 100 %>
+              <% end %>
+            </td>
+
+            <%# 施設名 %>
+            <td>
+              <%= link_to room.name, room_path(room) %>
+            </td>
+
+            <%# 紹介文 %>
+            <td>
+              <%= truncate(room.description, length: 50) %>
+            </td>
+
+            <%# 料金 %>
+            <td>
+              <%= number_to_currency(room.price) %>
+            </td>
+
+            <%# 作成日 %>
+            <td>
+              <%= room.created_at.strftime("%Y/%m/%d %H:%M") %>
+            </td>
+
+            <%# 編集・削除ボタン %>
+            <td>
+              <%= link_to "編集", edit_room_path(room), class: "btn btn-primary btn-sm" %>
+              <%= link_to "削除",
+                    room_path(room),
+                    data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+                    class: "btn btn-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p>まだ部屋を登録していません。</p>
+<% end %>

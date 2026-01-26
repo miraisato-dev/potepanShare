@@ -1,7 +1,5 @@
-<div class="page-container">
-  <h1>予約内容の確認</h1>
-  
-  <div class="card p-4">
+<h1>予約内容の確認</h1>
+  <div class="card p-4"> 
     <p>
       <strong>チェックイン：</strong>
       <%= @reservation.start_date&.strftime("%Y/%m/%d") %> <%#  &. でnil エラー防止 %>
@@ -15,6 +13,11 @@
     <p>
       <strong>宿泊日数：</strong>
       <%= (@reservation.end_date - @reservation.start_date).to_i %> 泊
+    </p>
+
+     <p>
+      <strong>人数：</strong>
+      <%= @reservation.guest_count %> 人
     </p>
   
     <hr>
@@ -34,6 +37,7 @@
   
       <%= f.hidden_field :start_date %>
       <%= f.hidden_field :end_date %>
+      <%= f.hidden_field :guest_count %>
   
       <%= f.submit "この内容で予約する",
             class: "btn btn-primary" %>
@@ -45,4 +49,3 @@
           room_path(@room),
           class: "btn btn-secondary" %>
   </div>
-</div>

@@ -255,6 +255,22 @@ main {
 
 
 /* =========================
+     Page 共通CSS
+========================= */
+
+.page-container {
+    max-width: var(--content-max-width);
+    /* 例: 1200px */
+    width: 100%;
+    /* 画面幅に応じて柔軟に */
+    margin-left: auto;
+    margin-right: auto;
+    padding: var(--space-6) 0;
+    /* 上下の余白 */
+}
+
+
+/* =========================
      Header
   ========================= */
 
@@ -422,6 +438,12 @@ app/views/home/index.html.erb  (Home Page)
 /* =========================
     Hero (app/views/home/index.html.erb  (Home Page))
   ========================= */
+
+/* homeページだけ page-container を無効化 */
+.home-page .page-container {
+    max-width: none;
+    padding: 0;
+}
 
 .hero {
     min-height: 100vh;
@@ -691,43 +713,30 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
 
 
 
-/* =========================
-     Page 共通CSS
-========================= */
+/* app/view/index.html/erb */
 
-.page-container {
-    max-width: var(--content-max-width);
-    /* 例: 1200px */
-    width: 100%;
-    /* 画面幅に応じて柔軟に */
-    margin-top: var(--space-8);
-    margin-left: auto;
-    margin-right: auto;
-    padding: var(--space-6) 0;
-    /* 上下の余白 */
-}
-
-
-/*  
-*/
 .search-nav {
+    width: 100%;
     background-color: var(--color-bg-gray);
+    padding: var(--space-4) 0;
+    padding: 40px 16px;
+    /* ← 縦幅を広げる */
 }
 
-/* rooms/index 用 */
+.search-nav-inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+}
+
 .rooms .form-group {
     width: var(--bp-s);
-    padding: var(--space-16);
 }
 
 .form-row {
     display: flex;
     justify-content: space-around;
 }
-
-
-
-/* app/view/index.html/erb */
 
 /* rooms-cardを横に並ばせはみ出たものは次の行 */
 .rooms {
@@ -736,11 +745,25 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
     gap: 16px;
     /* カード間の間隔 */
     padding: 0;
+    justify-content: flex-start;
+    /* 左詰になる */
 }
 
+/* rooms/index だけ上余白をつける グレーの検索ナビ */
+.rooms-index {
+    margin-top: var(--space-8);
+}
+
+/* rooms/index の検索フォームだけに限定 */
+.rooms-index .search-nav .form-group {
+    padding: var(--space-2);
+}
+
+
 .room-card {
-    flex: 1 1 calc(33.333% - 16px);
-    /* 横3列、gap分を引く */
+    flex: 0 0 calc(33.333% - 16px);
+    /* ← 伸びない */
+    max-width: calc(33.333% - 16px);
     background-color: var(--color-bg-gray);
     border-radius: var(--radius-md);
     overflow: hidden;
@@ -751,7 +774,6 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
 .room-info {
     margin: var(--space-5);
 }
-
 
 
 

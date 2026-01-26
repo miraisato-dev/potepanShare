@@ -24,17 +24,20 @@ Rails.application.routes.draw do
   # マイページ
   get "/my_page", to: "users#my_page", as: "my_page"
 
+  # マイ予約一覧用
+  get "/my_reservations", to: "reservations#my_index", as: "my_reservations"
+
   # 部屋関連
-  resources :rooms, only: [ :new, :create, :index, :show ] do
-    resources :reservations, only: [ :index, :create, :destroy ] do
+  resources :rooms, only: [ :new, :create, :index, :show, :edit, :update, :destroy ] do
+    resources :reservations, only: [ :index, :create, :new, :edit, :update, :destroy ] do
       collection do
         match :confirm, via: [ :get, :post ]
       end
     end
   end
 
-  # ユーザー全体の予約一覧
-  get "/my_reservations", to: "reservations#my_index", as: "my_reservations"
+  # 自分の登録した部屋一覧ページ
+  get "my_rooms", to: "rooms#my_index"
 
   # PWA関連（現在は未対応のためコメントアウト）
   # get "up" => "rails/health#show", as: :rails_health_check

@@ -1,42 +1,81 @@
 <%# app/views/reservations/my_index.html.erb %>
-<div class="page-container">
-  <h1>マイ予約一覧</h1>
-  
-  <% if @reservations.any? %>
-    <% @reservations.each do |reservation| %>
-      <div class="card mb-3 p-3">
-        <h3>
-          <%= link_to reservation.room.name, room_path(reservation.room) %>
-        </h3>
-  
-        <p>
-          <strong>チェックイン：</strong>
-          <%= reservation.start_date.strftime("%Y/%m/%d") %><br>
-          <strong>チェックアウト：</strong>
-          <%= reservation.end_date.strftime("%Y/%m/%d") %>
-        </p>
-  
-        <p>
-          <strong>宿泊日数：</strong>
-          <%= (reservation.end_date - reservation.start_date).to_i %> 泊
-        </p>
-  
-        <p>
-          <strong>合計料金：</strong>
-          <%= number_to_currency(reservation.total_price) %>
-        </p>
-  
-        <%= link_to "キャンセル",
-            room_reservation_path(reservation.room, reservation),
-            data: {
-              turbo_method: :delete,
-              turbo_confirm: "本当にキャンセルしますか？"
-            },
-            class: "btn btn-danger btn-sm" %>
-      </div>
-    <% end %>
-  <% else %>
-    <p>予約はまだありません。</p>
-  <% end %>
-  <%= link_to "部屋一覧に戻る", rooms_path, class: "btn btn-secondary" %>
-</div>
+<h1 class="page-title">マイ予約一覧</h1>
+<%= link_to "部屋一覧に戻る", rooms_path, class: "btn btn-secondary mt-3" %>
+
+<% if @reservations.any? %>
+  <div class="table-wrapper">
+    <table class="reservations-table">
+      <thead>
+        <tr>
+          <th>画像</th>
+          <th>施設名</th>
+          <th>紹介文</th>          
+          <th>合計料金</th>
+          <th>チェックイン</th>
+          <th>チェックアウト</th>
+          <th>宿泊日数</th>
+          <th>人数</th>
+          <th>予約確定日時</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @reservations.each do |reservation| %>
+
+          <tr>
+            <%# 画像 %>
+            <td class="room-image">
+              <% if reservation.room.image.attached? %>
+                <%= image_tag reservation.room.image.variant(resize_to_limit: [100, 100]), alt: reservation.room.name %>
+              <% else %>
+                <span>画像なし</span>
+              <% end %>
+            </td>
+
+            <%# 施設名 %>
+            <td class="room-name">
+              <%= link_to reservation.room.name, room_path(reservation.room) %>
+            </td>
+
+            <%# 紹介文 %>
+            <td class="room-description">
+              <%= truncate(reservation.room.description, length: 50) %>
+            </td>
+
+            <%# 合計料金 %>
+            <td class="price">
+              <%= number_to_currency(reservation.total_price) %>
+            </td>
+
+            <%# チェックインアウト %>
+            <td><%= reservation.start_date.strftime("%Y/%m/%d") %></td>
+            <td><%= reservation.end_date.strftime("%Y/%m/%d") %></td>
+
+            <%# 宿泊日数 %>
+            <td>
+              <%= (reservation.end_date - reservation.start_date).to_i %> 泊
+            </td>
+
+            <%# 人数 %>
+            <td><%= reservation.guest_count %> 人</td>
+
+            <%# 予約確定日時 %>
+            <td><%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+
+            <td>
+              <%= link_to "キャンセル",
+                    room_reservation_path(reservation.room, reservation),
+                    data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "本当にキャンセルしますか？"
+                    },
+                    class: "btn btn-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p>予約はまだありません。</p>
+<% end %>
