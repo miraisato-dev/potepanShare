@@ -1,9 +1,13 @@
+// app/javascript/controllers/index.js
 import { Application } from "@hotwired/stimulus"
+import ReservationDropdownController from "./reservation_dropdown_controller"
 
 const application = Application.start()
-window.Stimulus = application
+application.register("reservation-dropdown", ReservationDropdownController)
 
-export { application }
+window.Stimulus = application
+export { application }  // ← ここを追加
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const priceData = document.getElementById("price-data");
