@@ -15,7 +15,7 @@
         <%= (reservation.end_date - reservation.start_date).to_i %> 泊<br>
 
         <strong>料金：</strong>
-        <%= number_to_currency(reservation.total_price) %><br>
+        <%= number_to_currency(reservation.total_price.round, unit: "¥", precision: 0) %><br>
 
         <% if reservation.user == current_user %>
           <%= link_to "キャンセル",

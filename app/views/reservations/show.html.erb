@@ -17,7 +17,7 @@
 
 <p>
   <strong>料金：</strong>
-  <%= number_to_currency(@reservation.total_price) %>
+  <%= number_to_currency(reservation.total_price.round, unit: "¥", precision: 0) %>
 </p>
 
 <p>
