@@ -1,32 +1,39 @@
 <%# app/views/rooms/_form.html.erb %>
 <%= form_with model: room, local: true, multipart: true do |f| %>
-  <div>
-    <%= f.label :name, "施設名" %><br>
-    <%= f.text_field :name %>
-  </div>
-
-  <div>
-    <%= f.label :description, "施設詳細" %><br>
-    <%= f.text_area :description %>
-  </div>
-
-  <div>
-    <%= f.label :price, "料金" %><br>
-    <%= f.number_field :price %>
-  </div>
-
-  <div>
-    <%= f.label :address, "住所" %><br>
-    <%= f.text_field :address %>
-  </div>
-
-  <div>
-    <%= f.label :image, "施設画像" %><br>
-    <%= f.file_field :image %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.submit "保存", class: "btn btn-primary" %>
-    <%= link_to "キャンセル", request.referer || rooms_path, class: "btn btn-secondary" %>
+  <div class=form-page>
+  <h1>施設登録</h1>
+    <div class="form">
+      <form>
+        <div class="form-group">
+          <%= f.label :name, "施設名", class: "form-label form_label--required" %><br>
+          <%= f.text_field :name, placeholder: "ルーム名を入力", class: "form-control"  %>
+        </div>
+      
+        <div class="form-group">
+          <%= f.label :description, "施設詳細", class: "form-label form_label--required" %><br>
+          <%= f.text_area :description, placeholder: "施設詳細を入力", class: "form-control", rows: 4 %>
+        </div>
+      
+        <div class="form-group">
+          <%= f.label :price, "料金", class: "form-label form_label--required" %><br>
+          <%= f.number_field :price, placeholder: "一日あたりの料金を入力", class: "form-control" %>
+        </div>
+      
+        <div class="form-group">
+          <%= f.label :address, "住所", class: "form-label form_label--required" %><br>
+          <%= f.text_field :address, placeholder: "住所を入力", class: "form-control" %>
+        </div>
+      
+        <div class="form-group">
+          <%= f.label :image, "施設画像", class: "form-label" %><br>
+          <%= f.file_field :image, class: "form-control no-border" %>
+        </div>
+      
+        <div class="form-actions d-flex">
+          <%= f.submit "保存", class: "form-btn form-btn--primary" %>
+          <%= link_to "キャンセル", request.referer || rooms_path, class: "form-btn form-btn--secondary" %>
+        </div>
+    </div>
+    </form>
   </div>
 <% end %>

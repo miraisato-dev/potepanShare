@@ -20,10 +20,11 @@
             <%# 画像 %>
             <td>
               <% if room.image.attached? %>
-                <%= image_tag room.image.variant(resize_to_limit: [100, 100]), alt: room.name %>
+                <%= image_tag room.image, width: 100 %>
               <% else %>
                 <%= image_tag "default_room.png", alt: "画像なし", width: 100 %>
               <% end %>
+
             </td>
 
             <%# 施設名 %>
