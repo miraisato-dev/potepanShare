@@ -23,8 +23,8 @@
           <tr>
             <%# 画像 %>
             <td class="room-image">
-              <% if reservation.room.image.attached? %>
-                <%= image_tag reservation.room.image.variant(resize_to_limit: [100, 100]), alt: reservation.room.name %>
+              <% if reservation.room&.image&.attached? %>
+                <%= image_tag url_for(reservation.room.image), alt: reservation.room.name %>
               <% else %>
                 <span>画像なし</span>
               <% end %>

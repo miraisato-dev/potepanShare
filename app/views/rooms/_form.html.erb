@@ -1,9 +1,10 @@
 <%# app/views/rooms/_form.html.erb %>
 <%= form_with model: room, local: true, multipart: true do |f| %>
   <div class=form-page>
-  <h1>施設登録</h1>
-    <div class="form">
-      <form>
+    <h1>施設登録</h1>
+
+      <div class="form">
+
         <div class="form-group">
           <%= f.label :name, "施設名", class: "form-label form_label--required" %><br>
           <%= f.text_field :name, placeholder: "ルーム名を入力", class: "form-control"  %>
@@ -33,7 +34,8 @@
           <%= f.submit "保存", class: "form-btn form-btn--primary" %>
           <%= link_to "キャンセル", request.referer || rooms_path, class: "form-btn form-btn--secondary" %>
         </div>
-    </div>
-    </form>
+      
+      </div>
+
   </div>
 <% end %>

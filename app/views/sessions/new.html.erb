@@ -1,25 +1,26 @@
 <%# app/views/sessions/new.html.erb %>
-<div class="auth-container">
-  <div class="auth-card">
-    <h1 class="auth-title">ログイン</h1>
+<%= form_with url: login_path, local: true do |f| %>
 
-    <%= form_with url: login_path, local: true, class: "auth-form" do |f| %>
+  <div class="form-page">
+    <h1>ログイン</h1>
+
+    <div class="form">
+
       <div class="form-group">
-        <%= f.label :email, "メールアドレス" %>
-        <%= f.email_field :email, class: "form-input", placeholder: "example@email.com" %>
+        <%= f.label :email, "メールアドレス", class: "form-label" %>
+        <%= f.email_field :email, class: "form-control", placeholder: "example@email.com" %>
       </div>
 
       <div class="form-group">
-        <%= f.label :password, "パスワード" %>
-        <%= f.password_field :password, class: "form-input", placeholder: "********" %>
+        <%= f.label :password, "パスワード", class: "form-label" %>
+        <%= f.password_field :password, class: "form-control", placeholder: "********" %>
       </div>
 
-      <%= f.submit "ログイン", class: "auth-button" %>
-    <% end %>
+      <div class="form-actions d-flex">
+        <%= f.submit "ログイン", class: "form-btn form-btn--primary" %>
+        <%= link_to "新しいアカウントを作成", new_user_path, class: "form-btn form-btn--secondary" %>
+      </div>
 
-    <p class="auth-link">
-      アカウントをお持ちでない方は
-      <span class="link_to"><%= link_to "新規登録", new_user_path %></span>
-    </p>
+    </div>
   </div>
-</div>
+<% end %>

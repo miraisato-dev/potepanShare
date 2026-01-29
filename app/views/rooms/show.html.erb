@@ -1,77 +1,146 @@
 <%# app/views/rooms/show.html.erb %>
 <div data-controller="room-reservation">
-<h1><%= @room.name %></h1>
-  <div class="mb-3">
-    <%= link_to "部屋一覧に戻る", rooms_path, class: "btn btn-secondary" %>
+  <%# ===============================
+    検索フォーム（フル幅・header直下）
+    =============================== %>
+    <% content_for :full_width do %>
+      <div class="search-nav">
+        <div class="search-nav-inner">
+          <%= form_with url: rooms_path, method: :get, local: true do |f| %>
+            <div class="form-row d-flex align-items-center">           
+              <%# エリア検索 %>
+              <div class="form-group">
+                <div class="input-with-icon">
+                  <!-- SVG -->
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" aria-hidden="true">
+                    <path d="M128 252.6C128 148.4 214 64 320 64C426 64 512 148.4 512 252.6C512 371.9 391.8 514.9 341.6 569.4C329.8 582.2 310.1 582.2 298.3 569.4C248.1 514.9 127.9 371.9 127.9 252.6zM320 320C355.3 320 384 291.3 384 256C384 220.7 355.3 192 320 192C284.7 192 256 220.7 256 256C256 291.3 284.7 320 320 320z"/>
+                  </svg>
+                  <%= text_field_tag :area, params[:area],
+                        class: "icon-input",
+                        placeholder: "エリアを入力" %>
+                </div>
+              </div>
 
-      <% if current_user && @room.user == current_user %>
-        <%= link_to "編集", edit_room_path(@room), class: "btn btn-primary ml-2" %>
+              <%# フリーワード検索 %>
+              <div class="form-group">
+                <div class="input-with-icon">
+                <!--SVG-->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+                  <path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/>
+                </svg>
+                <%= text_field_tag :keyword, params[:keyword],
+                        class: "icon-input",
+                        placeholder: "キーワード名を入力" %>
+                </div>
+              </div>
 
-        <%= link_to "削除",
-              room_path(@room),
-              method: :delete,
-              data: { confirm: "本当に削除しますか？" },
-              class: "btn btn-danger ml-2" %>
+              <%# 検索 %>
+              <div class="form-group">
+                <input type="submit" name="commit" value="検索" class=" search-button" data-disable-with="検索">
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
     <% end %>
-  </div>
-  
-    <% if current_user %>
-      <h2>予約する</h2>
 
+
+  <%# ===============================
+    Main
+    =============================== %>
       <div id="price-data" data-price="<%= @room.price %>"></div>
   
-      <% if @room.image.attached? %>
-        <%= image_tag @room.image, class: "room-image-large" %>
-      <% else %>
-        <%= image_tag "default_room.png", class: "room-image-large" %>
-      <% end %>
+      <div class="room-show-layout">
+      <!-- 左：画像 -->
+        <div class="room-show-image">
+          <% if @room.image.attached? %>
+            <%= image_tag @room.image, class: "room-image-large" %>
+          <% else %>
+            <%= image_tag "default_room.png", class: "room-image-large" %>
+          <% end %>
+        </div>
 
-      <%= form_with model: Reservation.new,
-            url: confirm_room_reservations_path(@room),
-            local: true,
-            data: { turbo: false } do |f| %>
+        <%= form_with model: Reservation.new,
+              url: confirm_room_reservations_path(@room),
+              local: true,
+              data: { turbo: false } do |f| %>
   
-        <p>
-          <strong>チェックイン：</strong>
-          <!-- type="text" にする dateにするとturboで動かない-->
-          <%= f.text_field :start_date,
-          id: "start_date",
-          autocomplete: "off",
-          placeholder: "yyyy/mm/dd" %>
-        </p>
+        <!-- 右：カード -->
+        <div class="room-show-card">
+          <div class="room-show-card-title">
+            <h1 class="room-title"><%= @room.name %></h1>
+            <p class="room-price">￥
+              <span id="price-per-night"><%= @room.price %></span>〜
+            </p>
+          </div>
   
-        <p>
-          <strong>チェックアウト：</strong>
-          <%= f.text_field :end_date,
-          id: "end_date",
-          autocomplete: "off",
-          placeholder: "yyyy/mm/dd" %>
-        </p>
-
-        <p>
-          <strong>人数：</strong>
-          <%= f.number_field :guest_count,
-                min: 1,
-                value: 1,
-                id: "guest_count" %> 人
-        </p>
-
-        <p>
-          <strong>料金：</strong>
-          <span id="price-per-night"><%= @room.price %></span> 円 / 人 / 泊
-        </p>
-
-        <p>
-          <strong>合計金額：</strong>
-          <span id="total-price">0</span> 円
-        </p>
-
-        <%= f.submit "予約する", class: "btn btn-primary" %>
-      <% end %>
+          <p class="room-address">
+            <%= @room.address %>
+          </p>
+  
+          <p class="room-description">
+            <%= @room.description %>
+          </p>
+  
+          <div class="reservation-row">
+            <div class="reservation-field">
+              <label>チェックイン</label>
+              <div class="input-with-icon-right">
+              <%= f.text_field :start_date,
+                  id: "start_date",
+                  class: "reservation-input",
+                  autocomplete: "off",
+                  placeholder: "yyyy/mm/dd" %>
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="svg"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+                    <path d="M224 64C206.3 64 192 78.3 192 96L192 128L160 128C124.7 128 96 156.7 96 192L96 240L544 240L544 192C544 156.7 515.3 128 480 128L448 128L448 96C448 78.3 433.7 64 416 64C398.3 64 384 78.3 384 96L384 128L256 128L256 96C256 78.3 241.7 64 224 64zM96 288L96 480C96 515.3 124.7 544 160 544L480 544C515.3 544 544 515.3 544 480L544 288L96 288z"/>
+                    </svg>
+                  </span>
+              </div>
+            </div>
+  
+            <div class="reservation-field">
+              <label>チェックアウト</label>
+              <div class="input-with-icon-right">
+              <%= f.text_field :end_date,
+                  id: "end_date",
+                  class: "reservation-input",
+                  autocomplete: "off",
+                  placeholder: "yyyy/mm/dd" %>
+                  <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="svg"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+                    <path d="M224 64C206.3 64 192 78.3 192 96L192 128L160 128C124.7 128 96 156.7 96 192L96 240L544 240L544 192C544 156.7 515.3 128 480 128L448 128L448 96C448 78.3 433.7 64 416 64C398.3 64 384 78.3 384 96L384 128L256 128L256 96C256 78.3 241.7 64 224 64zM96 288L96 480C96 515.3 124.7 544 160 544L480 544C515.3 544 544 515.3 544 480L544 288L96 288z"/>
+                    </svg>
+                  </span>
+              </div>
+            </div>
+  
+            <div class="reservation-field reservation-field--guest">
+              <label>人数</label>
+              <div class="guest-input-wrap">
+                <%= f.number_field :guest_count,
+                      min: 1,
+                      id: "guest_count",
+                      placeholder:"0",
+                      class: "reservation-input reservation-input--guest" %>
+                <span class="guest-unit">人</span>
+              </div>
+            </div>
+  </div>
+  
+  
+        <!-- ログイン時のみ予約ボタン -->
+        <% if current_user %>
+          <%= f.submit "予約する", class: "form-btn form-btn--primary" %>
+        <% else %>
+          <%= link_to "ログインして予約", login_path, class: "form-btn form-btn--primary btn-warning" %>
+        <% end %>
+</div>
+  
   
       <!-- 予約済み日データ -->
-      <div id="booked-dates" data-dates="<%= @room.booked_dates.map(&:to_s).join(',') %>"></div>
-    <% else %>
-      <%= link_to "ログインして予約", login_path, class: "btn btn-warning" %>
-    <% end %>
+      <div id="booked-dates" 
+        data-dates="<%= @room.booked_dates.map(&:to_s).join(',') %>">
+      </div>
+<% end %>
 </div>
