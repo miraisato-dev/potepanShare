@@ -38,7 +38,7 @@ class ReservationsController < ApplicationController
     @reservation.valid?  # ← これを入れないと合計金額が出ないエラーになる
   end
 
-  # 予約作成　確定版
+  # 予約作成
   def create
     @reservation = @room.reservations.build(reservation_params)
     @reservation.user = current_user
