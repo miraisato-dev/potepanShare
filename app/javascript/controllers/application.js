@@ -6,7 +6,7 @@ const application = Application.start()
 application.register("reservation-dropdown", ReservationDropdownController)
 
 window.Stimulus = application
-export { application }  // ← ここを追加
+export { application }
 
 
 document.addEventListener("DOMContentLoaded", () => {
