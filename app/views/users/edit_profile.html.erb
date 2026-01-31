@@ -1,24 +1,47 @@
 <!-- app/views/users/edit_profile.html.erb -->
 <%= render 'settings_layout' do %>
-  <%# プロフィール編集 %>
-  <h2>プロフィール</h2>
+
+<div class="settings-section">
+  <div class="settings-section__header">
+    <h2 class="settings-section__title">プロフィール</h2>
+  </div>
 
   <%= form_with model: @user, url: profile_path, local: true do |f| %>
-    <div>
-      <%= f.label :avatar, "アイコン画像" %>
-      <%= f.file_field :avatar %>
+
+    <div class="settings-list">
+
+      <!-- アイコン -->
+      <div class="settings-list__row">
+        <%= f.label :avatar, "アイコン画像", class: "settings-list__label" %>
+        <div class="settings-list__value">
+          <%= f.file_field :avatar %>
+        </div>
+      </div>
+
+      <!-- 名前 -->
+      <div class="settings-list__row">
+        <%= f.label :name, "名前", class: "settings-list__label" %>
+        <div class="settings-list__value">
+          <%= f.text_field :name %>
+        </div>
+      </div>
+
+      <!-- 自己紹介 -->
+      <div class="settings-list__row">
+        <%= f.label :bio, "自己紹介", class: "settings-list__label" %>
+        <div class="settings-list__value">
+          <%= f.text_area :bio %>
+        </div>
+      </div>
+
     </div>
 
-    <div>
-      <%= f.label :name, "名前" %>
-      <%= f.text_field :name %>
+    <div class="settings-section__actions">
+      <%= f.submit "更新", class: "auth-button" %>
     </div>
 
-    <div>
-      <%= f.label :bio, "自己紹介" %>
-      <%= f.text_area :bio %>
-    </div>
-
-    <%= f.submit "更新", class: "auth-button" %>
   <% end %>
+
+</div>
+
 <% end %>

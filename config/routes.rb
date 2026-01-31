@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   # マイページ
   get "/my_page", to: "users#my_page", as: "my_page"
 
-  # マイ予約一覧用
+  # 予約済み一覧用
   get "/my_reservations", to: "reservations#my_index", as: "my_reservations"
 
   # 部屋関連

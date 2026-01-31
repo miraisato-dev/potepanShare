@@ -1,7 +1,7 @@
 <%# app/views/rooms/index.html.erb %>
 
 <%# ===============================
-   検索フォーム（フル幅・header直下）
+  検索フォーム（フル幅・header直下）
 =============================== %>
 <% content_for :full_width do %>
   <div class="search-nav">
@@ -36,7 +36,7 @@
 
           <%# 検索 %>
           <div class="form-group">
-            <input type="submit" name="commit" value="検索" class=" search-button" data-disable-with="検索">
+            <input type="submit" name="commit" value="検索" class="search-button" data-disable-with="検索">
           </div>
         </div>
       <% end %>
@@ -45,14 +45,14 @@
 <% end %>
 
 <%# ===============================
-   メインコンテンツ（通常幅）
+  メインコンテンツ（通常幅）
 =============================== %>
 <div class="rooms-index">
   <h1>
     <% if params[:area].present? || params[:keyword].present? %>
-      検索結果：<%= @rooms.count %>件が見つかりました
-    <% else %>
-      部屋一覧
+    <span style="font-size: 1.2em; font-weight: bold;">
+      <%= @rooms.count %>
+    </span>件が見つかりました。
     <% end %>
   </h1>
 
@@ -77,9 +77,10 @@
             <p class="small mb-2"><%= truncate(room.description, length: 60) %></p>
           <% end %>
 
-          <p class="room-price"><%= number_to_currency(room.price) %>〜 / 泊</p>
-
-          <%= link_to "詳細を見る", room_path(room), class: "btn btn-outline-primary btn-sm mt-2" %>
+          <div class="form-group">
+            <p class="room-price"><%= number_to_currency(room.price, unit: "¥", precision: 0) %>〜</p>
+            <%= link_to "詳細はこちら", room_path(room), class: "form-btn form-btn--primary" %>
+          </div>
         </div>
       </li>
     <% end %>

@@ -1,7 +1,10 @@
 <%# app/views/rooms/_form.html.erb %>
 <%= form_with model: room, local: true, multipart: true do |f| %>
   <div class=form-page>
-    <h1>施設登録</h1>
+    <h1>
+      <%= room.persisted? ? "施設情報の編集" : "施設登録" %>
+      <%# 保存済みの場合のみ施設情報の編集と表示 %>
+    </h1>
 
       <div class="form">
 

@@ -1,5 +1,5 @@
 <%# app/views/reservations/my_index.html.erb %>
-<h1 class="page-title">マイ予約一覧</h1>
+<h1 class="page-title">予約済み一覧</h1>
 
 <% if @reservations.any? %>
   <div class="table-wrapper">
@@ -32,7 +32,7 @@
 
             <%# 施設名 %>
             <td class="room-name">
-              <%= link_to reservation.room.name, room_path(reservation.room) %>
+              <%= link_to reservation.room.name, room_path(reservation.room), class: "link-text" %>
             </td>
 
             <%# 紹介文 %>

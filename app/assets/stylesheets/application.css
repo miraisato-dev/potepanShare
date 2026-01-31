@@ -1,18 +1,4 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+@charset "UTF-8";
 
 *,
 ::before,
@@ -24,7 +10,7 @@
 
 :root {
     /* =========================
-     Color System
+    Color System
   ========================= */
 
     /* Base colors */
@@ -44,7 +30,7 @@
     --color-gray-900: #111827;
 
     /* Brand colors */
-    --color-blue: #2563eb;
+    --color-blue: #0071c1;
     --color-blue-light: #60a5fa;
     --color-blue-dark: #1e40af;
     --color-blue-navy: #1c1d3b;
@@ -55,7 +41,7 @@
 
     /* Semantic colors */
     --color-green-blight: #22c55e;
-    --color-orange-blight: #f59e0b;
+    --color-orange-blight: #ff7757;
     --color-red-blight: #ef4444;
     --color-blue-blight: #0ea5e9;
     --color-success: var(--color-green);
@@ -69,7 +55,7 @@
     /* Text colors */
     --color-text-main: #111827;
     --color-text-sub: #374151;
-    --color-text-muted: #6b7280;
+    --color-text-muted: #767e86;
     --color-text-invert: #ffffff;
 
     /* Background colors */
@@ -94,7 +80,7 @@
     --light-red: #eb6969;
     --light-orange: #fff8f1;
     /* =========================
-     Typography
+    Typography
   ========================= */
 
     /* Font family */
@@ -104,7 +90,6 @@
     --font-serif: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji, "Noto Serif JP", serif;
     --font-mono: "JetBrains Mono", monospace;
     --font-lato: "Lato", sans-serif;
-
 
     /* Font size */
     --font-xs: 0.75rem;
@@ -127,9 +112,8 @@
     --leading-normal: 1.6;
     --leading-loose: 1.8;
 
-
     /* =========================
-     Spacing
+    Spacing
   ========================= */
 
     --space-0: 0;
@@ -150,15 +134,15 @@
     --space-48: 12rem;
     --space-56: 14rem;
 
-
     /* =========================
-     Layout
+    Layout
   ========================= */
 
     --content-max-width: 1400px;
     --content-wide-width: 1200px;
     --content-medium-width: 960px;
     --content-narrow-width: 720px;
+    --content-super-narrow-width: 640px;
 
     /* Breakpoints */
     --bp-xs: 320px;
@@ -171,13 +155,11 @@
     /* Header & Footer height */
     --header-height: 80px;
     --footer-height: 240px;
-
     --logo-height-header: 32px;
     --logo-height-footer: 40px;
 
-
     /* =========================
-     Radius
+    Radius
   ========================= */
 
     --radius-xs: 2px;
@@ -187,18 +169,16 @@
     --radius-xl: 20px;
     --radius-full: 9999px;
 
-
     /* =========================
-     Shadow
+    Shadow
   ========================= */
 
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, .05);
     --shadow-md: 0 4px 6px rgba(0, 0, 0, .1);
     --shadow-lg: 0 10px 20px rgba(0, 0, 0, .15);
 
-
     /* =========================
-     Z-index
+    Z-index
   ========================= */
 
     --z-base: 0;
@@ -207,22 +187,18 @@
     --z-modal: 500;
     --z-toast: 1000;
 
-
     /* =========================
-     Animation
+    Animation
   ========================= */
 
     --duration-fast: 150ms;
     --duration-normal: 300ms;
     --duration-slow: 500ms;
-
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 
-
     /* =========================
-     my_index.html.erb
+    my_index.html.erb
   ========================= */
-
 
     /* テーブル列幅（割合） */
     --room-col-img: 8%;
@@ -240,7 +216,6 @@
 
     /* 紹介文は「残り全部」 */
     --room-col-desc: calc(100% - (var(--room-col-img) + var(--room-col-name) + var(--room-col-price) + var(--room-col-date1) + var(--room-col-date1) + var(--room-col-date2) + var(--room-col-action)));
-
 
     /* Card */
     --card-bg: var(--color-bg-main);
@@ -260,9 +235,8 @@
     --room-show-gap: var(--space-10);
 }
 
-
 /* =========================
-     共通
+    共通
   ========================= */
 
 .logo {
@@ -274,6 +248,24 @@
 a,
 button {
     cursor: pointer;
+}
+
+.link-text {
+    color: var(--color-blue);
+    text-decoration: none;
+}
+
+.link-text:visited {
+    color: var(--color-blue);
+}
+
+.link-text:hover {
+    opacity: 0.5;
+}
+
+::placeholder {
+    color: var(--color-gray-400);
+    opacity: 1;
 }
 
 
@@ -302,7 +294,7 @@ main {
 
 
 /* =========================
-     Page 共通CSS
+    Page 共通CSS
 ========================= */
 
 .page-container {
@@ -316,11 +308,7 @@ main {
     /* 上下の余白 */
 }
 
-
-/* =========================
-    Header
-  ========================= */
-
+/* Header */
 .header {
     height: var(--header-height);
     display: flex;
@@ -331,10 +319,7 @@ main {
     color: #ffffff;
 }
 
-/* =========================
-    Navigation
-  ========================= */
-
+/* Navigation */
 .nav {
     height: var(--header-height);
     display: flex;
@@ -372,7 +357,7 @@ main {
 }
 
 .nav-link.new-member {
-    background-color: var(--color-red-blight);
+    background-color: var(--color-orange-blight);
     color: var(--color-white);
     padding: var(--space-2) var(--space-4);
     border-radius: var(--radius-sm);
@@ -382,9 +367,7 @@ main {
     color: var(--color-blue-light);
 }
 
-/* ===============
-    ユーザーメニュー欄 
-    ================*/
+/* ユーザーメニュー欄 */
 
 /* ===== ユーザーメニュー ===== */
 .user-menu {
@@ -454,7 +437,7 @@ main {
     z-index: var(--z-dropdown);
 }
 
-/* show クラスでも開ける（reservation と統一） */
+/* show クラスでも開ける（reservation と統一) */
 .user-menu.show .user-dropdown-menu {
     display: block;
 }
@@ -480,7 +463,7 @@ main {
 
 
 /* =========================
-     Footer
+    Footer(共通)
   ========================= */
 
 .footer {
@@ -511,23 +494,11 @@ main {
 }
 
 
-
-
-
-
-
-
-
-
 /* =========================
-     
 app/views/home/index.html.erb  (Home Page)
-
   ========================= */
 
-/* =========================
-    Hero (app/views/home/index.html.erb  (Home Page))
-  ========================= */
+/* Hero (app/views/home/index.html.erb  (Home Page) */
 
 /* homeページだけ page-container を無効化 */
 .home-page .page-container {
@@ -545,7 +516,6 @@ app/views/home/index.html.erb  (Home Page)
     justify-content: center;
 }
 
-
 .hero-img {
     width: 100%;
     height: 100%;
@@ -560,7 +530,6 @@ app/views/home/index.html.erb  (Home Page)
     padding: var(--space-10);
 }
 
-
 .hero-title {
     font-size: var(--font-4xl);
     font-weight: var(--font-bold);
@@ -573,45 +542,29 @@ app/views/home/index.html.erb  (Home Page)
     margin-bottom: var(--space-8);
 }
 
-
 .hero-search form {
+    width: var(--content-super-narrow-width);
     display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: var(--space-3);
     justify-content: center;
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: var(--space-10);
 }
 
 .hero-input {
-    width: 280px;
+    width: 100%;
     padding: var(--space-3);
     border-radius: var(--radius-md);
     border: none;
     font-size: var(--font-md);
 }
 
-.hero-button {
-    padding: var(--space-3) var(--space-6);
-    background-color: var(--color-blue);
-    color: var(--color-white);
-    border: none;
-    border-radius: var(--radius-md);
-    font-size: var(--font-md);
-    font-weight: var(--font-medium);
-    cursor: pointer;
-}
-
-.hero-button:hover {
-    background-color: var(--color-blue-light);
-}
-
-
-
-
-
-
-
 /* =========================
-Recommended Areas (app/views/home/index.html.erb  (Home Page))
-  ========================= */
+    Recommended Areas
+    app/views/home/index.html.erb  (Home Page)
+========================= */
 
 .recommended-areas {
     margin-top: var(--space-56);
@@ -623,9 +576,8 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
 
 .recommended-areas h2 {
     font-size: var(--font-3xl);
-    font-weight: var(--font-bold);
     width: fit-content;
-    border-bottom: #ef4444 4px solid;
+    border-bottom: var(--color-orange-blight) 4px solid;
 }
 
 .area-cards {
@@ -646,7 +598,7 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
     position: relative;
     overflow: hidden;
     /* 画像のはみ出し防止 */
-    font-weight: var(--font-bold);
+    font-weight: normal;
 }
 
 .area-card p {
@@ -678,8 +630,9 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
 
 
 /* =========================
-    Footer Adjustment for Home Page (app/views/home/index.html.erb  (Home Page))
-     .footer共通で余白なし、ホームページのみ余白あり
+    Footer Adjustment for Home Page
+    app/views/home/index.html.erb  (Home Page))
+    .footer共通で余白なし、ホームページのみ余白あり
       ========================= */
 
 .home-page .footer {
@@ -688,7 +641,7 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
 
 
 /* =========================
-   app/view/rooms/index.html/erb
+    app/view/rooms/index.html/erb
 ========================= */
 
 /* 上部エリア検索フォーム */
@@ -709,7 +662,7 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
 .rooms {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 24px;
     /* カード間の間隔 */
     padding: 0;
     justify-content: flex-start;
@@ -721,12 +674,37 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
     margin-top: var(--space-8);
 }
 
+.rooms-index h1 {
+    font-weight: normal;
+    font-size: var(--font-2xl);
+    margin-bottom: var(--space-4);
+}
+
 /* rooms/index の検索フォームだけに限定 */
 .rooms-index .search-nav .form-group {
     flex: 1;
     padding: var(--space-2);
     max-width: 560px;
-    /* ← ここが横幅 */
+    /* 横幅 */
+}
+
+.room-info {
+    margin: var(--space-5);
+}
+
+.room-info h3 {
+    font-weight: var(--font-light);
+    color: var(--color-text-muted);
+    font-size: var(--font-2xl);
+}
+
+.room-info .form-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.room-info .form-btn {
+    width: auto;
 }
 
 .form-row {
@@ -742,19 +720,14 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
     /* 要素間の余白 */
 }
 
-
 .room-card {
     flex: 0 0 calc(33.333% - 16px);
-    /* ← 伸びない */
+    /* 伸びない */
     max-width: calc(33.333% - 16px);
-    background-color: var(--color-bg-gray);
+    background-color: var(--light-orange);
     border-radius: var(--radius-md);
     overflow: hidden;
     /* marginは.roomsへのgapで管理するので不要 */
-}
-
-.room-info {
-    margin: var(--space-5);
 }
 
 /* ===== input + SVG icon ===== */
@@ -770,7 +743,7 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
     transform: translateY(-50%);
     width: 18px;
     height: 18px;
-    fill: var(--color-gray-500);
+    fill: var(--color-gray-300);
     pointer-events: none;
 }
 
@@ -795,13 +768,14 @@ Recommended Areas (app/views/home/index.html.erb  (Home Page))
 .search-button {
     height: 44px;
     /* input と同じ */
-    padding: 0 20px;
+    padding: 12px 40px 12px 40px;
     /* 横幅だけ抑える */
     font-size: var(--font-sm);
+    text-align: center;
     border-radius: var(--radius-sm);
     border: none;
+    cursor: pointer;
 }
-
 
 
 /* =========================
@@ -813,16 +787,12 @@ app/views/rooms/my_index.html.erb
 
 /* ページタイトル */
 .page-title {
-    font-family: var(--font-gothic);
-    font-size: var(--font-2xl);
-    font-weight: var(--font-bold);
-    color: var(--color-text-main);
+    font-weight: normal;
     margin-bottom: var(--space-6);
 }
 
 /* テーブル全体 */
 .table-wrapper {
-    overflow-x: auto;
     margin-bottom: var(--space-12);
 }
 
@@ -841,16 +811,13 @@ app/views/rooms/my_index.html.erb
 /* th */
 .rooms-table th,
 .reservations-table th {
-    border-bottom: 1px solid var(--color-gray-100);
+    border-bottom: 1px solid var(--color-gray-500);
     padding: var(--space-4) var(--space-2);
     text-align: left;
-    background-color: var(--color-bg-sub);
     vertical-align: middle;
 }
 
-/* =========================
-reservation/my_index 用 列幅調整　開始
-=========================*/
+/* reservation/my_index 用 列幅調整　開始 */
 .reservations-table th:nth-child(1) {
     width: var(--room-col-img);
 }
@@ -861,7 +828,7 @@ reservation/my_index 用 列幅調整　開始
 
 .reservations-table th:nth-child(3) {
     width: var(--room-col-desc);
-    /* ← 残り全部 */
+    /* 残り全部 */
 }
 
 .rooms-table th:nth-child(4),
@@ -885,14 +852,9 @@ reservation/my_index 用 列幅調整　開始
     width: var(--room-col-action);
 }
 
-/* =========================
-reservation/my_index 用 列幅調整　終了
-=========================*/
+/* reservation/my_index 用 列幅調整　終了 */
 
-/* =========================
-   rooms/my_index 専用 列幅調整　開始
-========================= */
-
+/* rooms/my_index 専用 列幅調整　開始 */
 .rooms-table {
     table-layout: fixed;
     width: 100%;
@@ -934,9 +896,7 @@ reservation/my_index 用 列幅調整　終了
     width: 4%;
 }
 
-/* =========================
-   rooms/my_index 専用 列幅調整　終了
-========================= */
+/* rooms/my_index 専用 列幅調整　終了 */
 
 /* td */
 .rooms-table td,
@@ -1033,11 +993,9 @@ reservation/my_index 用 列幅調整　終了
 /* 削除 hover を少し強調 */
 .reservation-dropdown-menu .dropdown-item.text-danger:hover {
     background-color: rgba(239, 68, 68, 0.08);
-    /* red-blight薄め */
 }
 
 /* ドロップダウンメニュー終了 */
-
 
 
 /* =========================
@@ -1048,10 +1006,10 @@ reservation/my_index 用 列幅調整　終了
 =======================*/
 
 .form-page {
-    max-width: var(--content-narrow-width);
+    max-width: var(--content-super-narrow-width);
     margin: auto;
     font-size: var(--font-md);
-    margin-top: var(--space-10);
+    margin-top: var(--space-6);
     margin-bottom: var(--space-10);
 }
 
@@ -1076,9 +1034,9 @@ reservation/my_index 用 列幅調整　終了
 /* ===== group ===== */
 .form-page .form-group {
     display: flex;
-    /* flex-direction: column; */
+    align-items: center;
     gap: var(--space-2);
-    margin-bottom: var(--space-10);
+    margin-bottom: var(--space-8);
 }
 
 /* ===== input ===== */
@@ -1088,9 +1046,6 @@ reservation/my_index 用 列幅調整　終了
     border-radius: var(--radius-md);
     border: 1px solid var(--color-gray-200);
     background-color: var(--color-bg-main);
-    transition:
-        border-color var(--duration-fast) var(--ease-in-out),
-        box-shadow var(--duration-fast) var(--ease-in-out);
 }
 
 /* ===== focus ===== */
@@ -1121,49 +1076,25 @@ reservation/my_index 用 列幅調整　終了
 }
 
 /* 共通サイズ */
-/* .form-btn {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 52px;
-    /* ← 高さ固定 */
-/* min-width: 120px; */
-/* ← 横幅最低保証 */
-
-/* padding: 0 var(--space-6);
-    border-radius: var(--radius-md);
-    font-size: var(--font-sm);
-    font-weight: var(--font-medium);
-
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-} */
-
 .form-btn {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-
     width: 100%;
     height: 52px;
     min-width: 120px;
-
     padding: 0 var(--space-6);
     border-radius: var(--radius-md);
     font-size: var(--font-sm);
     font-weight: var(--font-medium);
-
     text-decoration: none;
     border: none;
     cursor: pointer;
 }
 
-
 /* 保存 */
 .form-btn--primary {
-    background: var(--light-red);
+    background: var(--color-orange-blight);
     color: var(--color-white);
 }
 
@@ -1186,11 +1117,7 @@ reservation/my_index 用 列幅調整　終了
 /* =========================
     app/views/rooms/show.html.erb
 ========================= */
-
-
-/* =============================
-  全体レイアウト
-============================= */
+/* 全体レイアウト */
 .room-show-layout {
     display: grid;
     grid-template-columns: 0.8fr 1.2fr;
@@ -1198,24 +1125,19 @@ reservation/my_index 用 列幅調整　終了
     margin-top: var(--space-8);
 }
 
-/* =============================
-  左：画像
-============================= */
+/* 左：画像 */
 .room-show-image img {
     width: 100%;
     object-fit: cover;
 }
 
-/* =============================
-  右：カード
-============================= */
+/*  右：カード */
 .room-show-card {
     background: var(--card-bg);
     padding: var(--card-padding);
     background-color: var(--light-orange);
 }
 
-/*  */
 .room-show-card-title {
     display: flex;
     justify-content: space-between;
@@ -1229,9 +1151,9 @@ reservation/my_index 用 列幅調整　終了
 }
 
 .room-price {
-    font-size: var(--font-4xl);
-    color: var(--color-red-blight);
-    font-weight: bold;
+    font-size: var(--font-2xl);
+    color: var(--color-orange-blight);
+    font-weight: var(--font-bold);
     display: flex;
     align-items: center;
 }
@@ -1247,9 +1169,7 @@ reservation/my_index 用 列幅調整　終了
     margin-bottom: 24px;
 }
 
-/* =============================
-  予約フォーム横並び
-============================= */
+/* 予約フォーム横並び */
 .reservation-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -1296,6 +1216,151 @@ reservation/my_index 用 列幅調整　終了
     fill: var(--color-gray-500);
     pointer-events: none;
 }
+
+.room-show-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-xl);
+}
+
+.room-show-actions__right,
+.room-show-actions__left {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.room-show-actions__icon {
+    width: 18px;
+    height: 18px;
+    fill: var(--color-blue);
+}
+
+
+/* =========================
+    app/views/reservations/confirm.html.erb
+========================= */
+
+.confirm-page .form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* =========================
+    app/views/users/_settings_layout.html.erb
+========================= */
+
+.settings {
+    margin-top: var(--space-4);
+}
+
+.settings h1 {
+    font-weight: normal;
+}
+
+.setting-wrapper {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--space-10);
+    margin-top: var(--space-10);
+}
+
+/* 箱 */
+.account-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid var(--color-gray-200);
+    background: var(--color-bg-main);
+}
+
+/* 上下に並ぶ */
+.account-nav__item {
+    border-bottom: 1px solid var(--color-gray-100);
+}
+
+.account-nav__item:last-child {
+    border-bottom: none;
+}
+
+.account-nav__link {
+    display: block;
+    width: 100%;
+    padding: var(--space-4) var(--space-5);
+    text-decoration: none;
+    color: var(--color-text-main);
+    font-size: var(--font-md);
+    font-weight: var(--font-medium);
+}
+
+.account-nav__link.account {
+    color: var(--color-orange-blight);
+}
+
+
+/* =========================
+    app/views/users/edit_account.html.erb
+
+========================= */
+
+.settings-section {
+    margin-bottom: var(--space-32);
+}
+
+.settings-section__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-xl);
+    border-bottom: 1px solid var(--color-gray-300);
+}
+
+.settings-section__title {
+    font-weight: normal;
+    line-height: var(--leading-loose);
+}
+
+.settings-section__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.settings-list {
+    margin-top: var(--space-10);
+}
+
+.settings-list__row {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--space-4);
+    align-items: center;
+    margin-bottom: var(--space-4);
+}
+
+.settings-list__label {
+    font-weight: var(--font-bold);
+    display: block;
+}
+
+.settings-list__value input,
+.settings-list__value textarea,
+.settings-list__value select {
+    width: 100%;
+    padding: 10px 12px;
+    /* 内側余白 */
+    border: 1px solid var(--color-gray-300);
+    /* 通常時 border */
+    border-radius: 6px;
+    font-size: var(--font-md);
+    background: white;
+    box-sizing: border-box;
+}
+
+
 
 
 

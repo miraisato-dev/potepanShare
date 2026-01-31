@@ -28,8 +28,8 @@
             </td>
 
             <%# 施設名 %>
-            <td>
-              <%= link_to room.name, room_path(room) %>
+            <td class="">
+              <%= link_to room.name, room_path(room), class: "link-text" %>
             </td>
 
             <%# 紹介文 %>
@@ -64,7 +64,7 @@
                           class: "dropdown-item" %>
                   </li>
                   <li><%# 登録施設削除 %>
-                    <%= link_to "削除",
+                    <%= link_to "施設を削除",
                           room_path(room),
                           data: {
                             turbo_method: :delete,

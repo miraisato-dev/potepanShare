@@ -1,33 +1,59 @@
 <%# app/views/users/account.html.erb %>
 <%= render "settings_layout" do %>
-    <h2>アカウント</h2>
-    
-    <!-- メールアドレス -->
-    <%= form_with model: @user, url: account_path, method: :patch do |f| %>
-      <div>
-        <%= f.label :email, "メールアドレス" %>
-        <%= f.email_field :email %>
+
+<div class="settings-section">
+
+  <!-- ヘッダー -->
+  <div class="settings-section__header">
+    <h2 class="settings-section__title">アカウント</h2>
+  </div>
+
+  <%= form_with model: @user, url: account_path, method: :patch, local: true do |f| %>
+
+    <div class="settings-list">
+
+      <!-- メールアドレス -->
+      <div class="settings-list__row">
+        <%= f.label :email, "メールアドレス", class: "settings-list__label" %>
+        <div class="settings-list__value">
+          <%= f.email_field :email %>
+        </div>
       </div>
 
-    <!-- パスワード -->
-      <div>
-        <%= f.label :password, "パスワード" %>
-        <%= f.password_field :password, autocomplete: "new-password" %>
-        <small>※変更する場合のみ入力</small>
+      <!-- パスワード -->
+      <div class="settings-list__row">
+        <%= f.label :password, "パスワード", class: "settings-list__label" %>
+        <div class="settings-list__value">
+          <%= f.password_field :password, autocomplete: "new-password" %>
+          <small>※変更する場合のみ入力</small>
+        </div>
       </div>
 
-    <!-- 確認用パスワード -->
-      <div>
-        <%= f.label :password_confirmation, "確認用パスワード" %>
-        <%= f.password_field :password_confirmation %>
-        <small>※変更する場合のみ入力</small>
+      <!-- 確認用パスワード -->
+      <div class="settings-list__row">
+        <%= f.label :password_confirmation, "確認用パスワード", class: "settings-list__label" %>
+        <div class="settings-list__value">
+          <%= f.password_field :password_confirmation %>
+          <small>※変更する場合のみ入力</small>
+        </div>
       </div>
 
-    <!-- 現在のパスワード -->
-      <div>
-        <%= f.label :current_password, "現在のパスワード" %>
-        <%= f.password_field :current_password %>
+      <!-- 現在のパスワード -->
+      <div class="settings-list__row">
+        <%= f.label :current_password, "現在のパスワード", class: "settings-list__label" %>
+        <div class="settings-list__value">
+          <%= f.password_field :current_password %>
+        </div>
       </div>
-      <% end %>
+
+    </div>
+
+    <div class="settings-section__actions">
+      <%= f.submit "更新", class: "auth-button" %>
+    </div>
+
+  <% end %>
+
+</div>
 
 <% end %>
