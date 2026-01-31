@@ -253,6 +253,10 @@ button {
 .link-text {
     color: var(--color-blue);
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    gap: var(--space-2);
 }
 
 .link-text:visited {
@@ -265,6 +269,8 @@ button {
 
 ::placeholder {
     color: var(--color-gray-400);
+    font-family: var(--font-gothic);
+    font-size: var(--font-sm);
     opacity: 1;
 }
 
@@ -1296,14 +1302,14 @@ app/views/rooms/my_index.html.erb
     font-weight: var(--font-medium);
 }
 
-.account-nav__link.account {
+.account-nav__link.active {
     color: var(--color-orange-blight);
 }
 
 
 /* =========================
     app/views/users/edit_account.html.erb
-
+    app/views/users/edit_profile.html.erb
 ========================= */
 
 .settings-section {
@@ -1321,12 +1327,6 @@ app/views/rooms/my_index.html.erb
 .settings-section__title {
     font-weight: normal;
     line-height: var(--leading-loose);
-}
-
-.settings-section__actions {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
 }
 
 .settings-list {
@@ -1354,14 +1354,109 @@ app/views/rooms/my_index.html.erb
     /* 内側余白 */
     border: 1px solid var(--color-gray-300);
     /* 通常時 border */
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     font-size: var(--font-md);
     background: white;
     box-sizing: border-box;
 }
 
+.settings-list__value input {
+    font-family: var(--font-gothic);
+    font-size: var(--font-sm);
+    opacity: 1;
+}
 
+/* アイコン＋アップロードの横並び */
+.avatar-container {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
 
+/* アイコン画像 */
+.avatar-container .user-avatar {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* file_field を右いっぱいに広げる */
+/* アイコン用の file_field は枠線なしに */
+.avatar-container input[type="file"] {
+    flex: 1;
+    /* 残りスペースを全部使う */
+    box-sizing: border-box;
+    border: none;
+    padding: 0;
+    /* ファイル選択ボタンは paddingなし */
+    background: none;
+}
+
+.avatar-edit-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-blue);
+    text-decoration: none;
+}
+
+.room-show-actions__icon {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    /* SVG の色を文字色に合わせる */
+}
+
+/* キャンセルボタン風リンク */
+.btn-cancel,
+.save-btn--primary {
+    display: inline-block;
+    padding: var(--space-6) var(--space-10);
+    /* 大きめ */
+    font-size: var(--font-md);
+    /* 少し大きく */
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-align: center;
+    min-width: var(--space-10);
+    /* 同じ幅に揃える場合 */
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+/* キャンセル */
+.btn-cancel {
+    border: 1px solid var(--color-gray-300);
+    background: white;
+    color: var(--color-text-main);
+}
+
+.btn-cancel:hover {
+    background: var(--color-gray-100);
+}
+
+/* 保存 */
+.save-btn--primary {
+    border: none;
+    background: var(--color-orange-blight);
+    color: var(--color-white);
+}
+
+.save-btn--primary:hover {
+    opacity: 0.7;
+    /* 30% は不透明度としては 0.3 では強すぎるので 0.7 が自然 */
+}
+
+/* 右下に配置 */
+.settings-section__actions.actions-right {
+    display: flex;
+    justify-content: flex-end;
+    /* 右寄せ */
+    gap: var(--space-4);
+    /* ボタン間の余白 */
+    margin-top: var(--space-6);
+}
 
 
 /* =========================
