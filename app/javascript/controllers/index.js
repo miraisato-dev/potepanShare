@@ -1,6 +1,7 @@
 // app/javascript/controllers/index.js
 
-import { application } from "./application"
+// import { application } from "./application"
+import { application } from "controllers/application"
 import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
 
 // "controllers" という名前でピン留めされたディレクトリ配下のコントローラーを自動ロード
