@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   post   "/login",  to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
+  post   "/guest_login", to: "sessions#guest_login"
+
   # マイページ
   get "/my_page", to: "users#my_page", as: "my_page"
 
