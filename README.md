@@ -1,5 +1,5 @@
 # PotepanShare
-
+![top](images/top.png)
 PotepanCampの最終課題で制作した宿泊施設の予約、登録システムです。
 
 🔗 Live Demo  
@@ -110,17 +110,19 @@ RailsでのCRUD処理や認証機能、
 ## 📸 スクリーンショット
 
 * トップページ
-![top](images/top.png)
-* ダッシュボード
-![dashboard](images/dashboard.png)
-* アイテム一覧
-![dashboard](images/list.png)
-* アイテム詳細
-![detail](images/detail.png)
-* ログイン画面
-![login](images/login.png)
-
-トップ → 検索 → 詳細 → 予約 → ダッシュボード
+![top](images/top2.png)
+* ログイン / 新規登録
+![new](images/new.png)
+* 施設一覧
+![hotel](images/hotel.png)
+* 施設詳細 / 予約画面
+![reservation](images/reservation.png)
+* 予約一覧
+![reservation_list](images/reservation_list.png)
+* プロフィールページ
+![profile](images/profile.png)
+* 施設登録画面
+![create](images/create.png)
 
 
 ## 👨‍💻 作者
