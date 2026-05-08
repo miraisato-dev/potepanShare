@@ -3,7 +3,7 @@
 PotepanCampの最終課題で制作した宿泊施設の予約、登録システムです。
 
 🔗 Live Demo  
-
+https://potepanshare.onrender.com
 
 ## 🌐 アプリ概要
 
@@ -14,7 +14,10 @@ PotepanShareは
 
 のためのWebアプリです。
 
-「」をコンセプトに設計しています。
+「誰でも簡単に宿泊施設を探して予約できるシンプルな体験」
+「個人でも宿泊施設を登録・管理できるAirbnb風サービス」
+
+をコンセプトに設計しています。
 
 
 ## 主な機能
@@ -43,21 +46,19 @@ PotepanShareは
 
 ## 🛠 技術スタック
 
-| Category        | Technology         |
-| --------------- | ------------------ |
-| Backend         | Ruby on Rails 7    |
-| Authentication  | Devise             |
-| Database        | ---       (本番環境)|
-|                 | / SQLite3(開発環境) |
-| Image Upload    | ActiveStorage?     |
-|                 | ---      (本番環境) |         
-| Frontend        | HTML / CSS / JS    |
-| Environment     | Docker             |
-| Version Control | Git / GitHub       |
+| Category        | Technology            |
+| --------------- | ----------------------|
+| Backend | Ruby on Rails 7 |
+| Authentication | Devise |
+| Database | Neon (Production) / SQLite3 (Development) |
+| Storage | ActiveStorage (Development) / Cloudinary (Production) |
+| Frontend | HTML / CSS / JavaScript |
+| Environment | Docker |
+| Version Control | Git / GitHub |
 
 
-## 🧱 ER図
-
+## 🧱 アーキテクチャ
+MVC構成（Rails）
 
 
 ## 🚀 セットアップ方法
@@ -89,19 +90,22 @@ PotepanCampの最終課題として、
 宿泊施設の登録・予約機能を持つWebアプリを開発しました。
 
 RailsでのCRUD処理や認証機能、
-画像アップロード、AWS S3を利用したファイル管理など、
+画像アップロード、Cloudinary、Neonを利用したファイル管理など、
 実践的なWebアプリ開発を学ぶことを目的に制作しました。
 
 
 ## 💡 工夫した点
 
-* 
+* ゲストログイン機能を実装し、誰でもすぐに試せるようにした
+* 開発環境ではActiveStorage、本番環境ではCloudinaryを使い分けて画像アップロードを最適化
+* 検索機能でエリア別に宿泊施設を絞り込み可能にした
+* UIをシンプルにして直感的に操作できる設計にした
 
 ## 🔮 今後の改善予定
 
 * カレンダーのデザインを変更
-* 
-* 
+* 京都と東京都のバリデーションをしっかりすること
+* 画像のアップロードが遅い
 
 ## 📸 スクリーンショット
 
@@ -115,6 +119,8 @@ RailsでのCRUD処理や認証機能、
 ![detail](images/detail.png)
 * ログイン画面
 ![login](images/login.png)
+
+トップ → 検索 → 詳細 → 予約 → ダッシュボード
 
 
 ## 👨‍💻 作者
