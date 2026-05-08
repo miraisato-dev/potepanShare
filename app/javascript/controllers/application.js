@@ -1,10 +1,11 @@
 // app/javascript/controllers/application.js
 
 import { Application } from "@hotwired/stimulus"
-import "../price_calculator"
 
 const application = Application.start()
 
+// デバッグ用にブラウザのコンソールで Stimulus を触れるようにする設定
+application.debug = false
 window.Stimulus = application
 
 export { application }
